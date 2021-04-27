@@ -17,14 +17,17 @@ class CreateMuseumsTable extends Migration
             $table->bigIncrements('id');
             $table->char('name', 100);
             $table->char('place', 100);
-            $table->char('time', 100);
-            $table->char('day', 100);
-            $table->char('money', 100);
-            $table->char('traffic', 100);
-            $table->char('sns', 100);
-            $table->char('place', 100);
+            $table->char('time', 100)->nullable;
+            $table->char('day', 100)->nullable;
+            $table->char('money', 100)->nullable;
+            $table->char('traffic', 100)->nullable;
+            $table->char('sns', 100)->nullable;
+            $table->char('tel', 100)->nullable;
+            $table->char('homepage', 100)->nullable;
             $table->char('other', 100)->nullable();
             $table->timestamps();
+            
+            $table->softDeletes();
         });
     }
 

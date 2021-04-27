@@ -2,50 +2,51 @@
 
 namespace App\Http\Controllers;
 
-use App\Review;
+use App\Museum;
 use Illuminate\Http\Request;
-//use App\Http\Requests\ReviewRequest;
+use App\Http\Requests\MuseumRequest;
 
-class ReviewController extends Controller
+class MuseumController extends Controller
 {
-    public function index(Review $review)
+    public function index(Museum $museum)
     {
-         return view('reviews.index')->with(['reviews' => $review->get()]);
+         return view('museums.index')->with(['museums' => $museum->get()]);
     }
 
-    public function show(Review $review)
+    public function show(Museum $museum)
     {
-        return view('reviews.show')->with(['review' => $review]);
+        return view('museums.show')->with(['museum' => $museum]);
     }
 
     public function create()
     {
-        return view('reviews.create');
+        return view('museums.create');
     }
 
-    public function store(Review $review, Request $request)
+    public function store(Museum $museum, MuseumRequest $request)
     {
-        $input = $request['review'];
-        $review->fill($input)->save();
-        return redirect('/reviews/' . $review->id);
+        $input = $request['museum'];
+        $museum->fill($input)->save();
+        return redirect('/museums/' . $museum->id);
     }
     
-    public function edit(Review $review)
+    public function edit(Museum $museum)
     {
-        return view('reviews.edit')->with(['review' => $review]);
+        return view('museums.edit')->with(['museum' => $museum]);
     }
     
-    public function update(Request $request, Review $review)
+    public function update(Request $request, Museum $museum)
     {
-        $input_review = $request['review'];
-        $review->fill($input_review)->save();
+        $input_museum = $request['museum'];
+        $museum->fill($input_museum)->save();
 
-        return redirect('/reviews/' . $review->id);
+        return redirect('/museums/' . $museum->id);
     }
     
-    public function delete(Review $review)
+    public function delete(Museum $museum)
     {
-        $review->delete();
-         return redirect('/');
+        $museum->delete();
+        return redirect('/');
     }
+    
 }
