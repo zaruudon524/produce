@@ -32,8 +32,7 @@
                <p class='other'>備考</p>
                <p class='other'>{{ $museum->other }}</p></bro>
             </div>
-             @endforeach
-             <input type="submit" value="bookmark"/>
+             @endforeach  
        </div>
     </body>
 </html>

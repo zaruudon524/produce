@@ -25,6 +25,7 @@ class CreateMuseumsTable extends Migration
             $table->char('tel', 100)->nullable;
             $table->char('homepage', 100)->nullable;
             $table->char('other', 100)->nullable();
+            $table->integer('bookmark');
             $table->timestamps();
             
             $table->softDeletes();

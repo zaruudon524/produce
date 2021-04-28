@@ -26,3 +26,8 @@ Route::put('/museums/{museum}/', 'MuseumController@update');
 Route::delete('/museums/{museum}', 'MuseumController@delete');
 Route::get('/museums/{museum}/', 'MuseumController@show');
 Route::post('/museums', 'MuseumController@store');
+
+Route::post('/museums', 'MuseumController@bookmark');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

@@ -8,10 +8,11 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     </head>
     <body>
-        <h1>投稿</h1
+        <h1>投稿</h1>
         <p class="edit">[<a href="/museums/{{ $museum->id }}/edit">edit</a>]</p>
             <input type="submit" style="display:none">
-        </form>
+            <input type="submit" value="bookmark"/>
+        <form>
             <div class='museums'>
                 <h2 class='name'>{{ $museum->name }}</h2>
                 <h2 class='place'>{{ $museum->place }}</h2>
