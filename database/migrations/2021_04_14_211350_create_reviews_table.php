@@ -15,9 +15,9 @@ class CreateReviewsTable extends Migration
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->char('name', 100);
             $table->char('title', 100);
             $table->string('body', 400);
+            $table->integer('museum_id');
             $table->timestamps();
             
             $table->softDeletes();

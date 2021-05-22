@@ -3,31 +3,37 @@
 namespace App\Http\Controllers;
 
 use App\Review;
+use App\Museum;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 //use App\Http\Requests\ReviewRequest;
 
 class ReviewController extends Controller
 {
-    public function index(Review $review)
+    public function index(Museum $museum)
     {
-         return view('reviews.index')->with(['reviews' => $review->get()]);
+         return view('reviews.index')->with(['museums' => $museum->get()]);
     }
 
-    public function show(Review $review)
+    public function show(Review $review, Museum $museum)
     {
-        return view('reviews.show')->with(['review' => $review]);
+        $museums = $museum ->get();
+        $review=$museum->museums()->where('museum_id');
+        // $museum = $review -> where('museum_id');
+        return view('reviews.show')->with(['review' => $review, 'museums' => $museum]);
     }
 
-    public function create()
+    public function create(Museum $museum)
     {
-        return view('reviews.create');
+        return view('reviews.create')->with(['museum' => $museum]);
     }
 
-    public function store(Review $review, Request $request)
+    public function store(Review $review, Request $request, Museum $museum)
     {
         $input = $request['review'];
+         $input['museum_id']=$museum->id;
         $review->fill($input)->save();
-        return redirect('/reviews/' . $review->id);
+        return redirect('/public/' . $museum->id);
     }
     
     public function edit(Review $review)

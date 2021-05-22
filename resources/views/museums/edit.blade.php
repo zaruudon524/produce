@@ -1,3 +1,6 @@
+@extends('layouts.app')
+
+@section('content')
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -6,7 +9,7 @@
     </head>
     
     <body>
-        <h1 class="title">編集画面</h1>
+        <h1 class="title">編集</h1>
         <div class="content">
              <form action="/museums/{{ $museum->id }}" method="POST">
                 @csrf
@@ -18,6 +21,10 @@
                 <div class='content__place'>
                     <h2>場所</h2>
                     <input type='text' name='museum[place]' value="{{ $museum->place }}">
+                </div>
+                <div class='content__body'>
+                    <h2>属性</h2>
+                    <input type='text' name='museum[body]' value="{{ $museum->body }}">
                 </div>
                 <div class='content__time'>
                     <h2>会館時間</h2>
@@ -57,3 +64,4 @@
         <div class="back">[<a href="/">back</a>]</div>
     </body>
 </html>
+ @endsection

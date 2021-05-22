@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMuseumBookmarkTable extends Migration
+class CreateTagsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class CreateMuseumBookmarkTable extends Migration
      */
     public function up()
     {
-        Schema::create('museum_bookmark', function (Blueprint $table) {
+        Schema::create('tags', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ class CreateMuseumBookmarkTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('museum_bookmark');
+        Schema::dropIfExists('tags');
     }
 }

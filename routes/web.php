@@ -11,23 +11,31 @@
 |
 */
 
-Route::get('/', 'ReviewController@index');
-Route::get('/reviews/create', 'ReviewController@create');
-Route::get('/reviews/{review}/edit', 'ReviewController@edit');
-Route::put('/reviews/{review}', 'ReviewController@update');
-Route::delete('/reviews/{review}', 'ReviewController@delete');
-Route::get('/reviews/{review}', 'ReviewController@show');
-Route::post('/reviews', 'ReviewController@store');
+Route::get('/', 'HomeController@search')->middleware('auth');
+Route::get('/reviews', 'ReviewController@index');
+Route::get('/reviews/create/{museum}', 'ReviewController@create')->middleware('auth');
+Route::get('/reviews/{review}/edit', 'ReviewController@edit')->middleware('auth');
+Route::put('/reviews/{review}', 'ReviewController@update')->middleware('auth');;
+Route::delete('/reviews/{review}', 'ReviewController@delete')->middleware('auth');
+Route::get('/reviews/{review}', 'ReviewController@show')->middleware('auth');
+Route::post('/reviews/{museum}', 'ReviewController@store')->middleware('auth');
 
-Route::get('/', 'MuseumController@index');
+Route::get('/museums', 'MuseumController@index')->middleware('auth');
 Route::get('/museums/create', 'MuseumController@create');
 Route::get('/museums/{museum}/edit', 'MuseumController@edit');
 Route::put('/museums/{museum}/', 'MuseumController@update');
 Route::delete('/museums/{museum}', 'MuseumController@delete');
 Route::get('/museums/{museum}/', 'MuseumController@show');
-Route::post('/museums', 'MuseumController@store');
+Route::post('/museums', 'MuseumController@store')->middleware('auth');
 
-Route::post('/museums', 'MuseumController@bookmark');
+Route::resource('/user', 'UserController@index')->middleware('auth');
+
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/public', 'HomeController@index')->name('home');
+Route::delete('/public/{museum}', 'HomeController@delete');
+Route::post('/public/{museum}/deletebookmark', 'HomeController@deletebookmark');
+Route::get('/public/{museum}/', 'HomeController@show')->middleware('auth');
+Route::post('/public/search', 'HomeController@search')->middleware('auth');
+Route::get('/public/{review}/', 'HomeController@comment');
+Route::put('/public/{museum}/bookmark', 'HomeController@bookmark');

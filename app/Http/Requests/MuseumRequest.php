@@ -22,6 +22,7 @@ class MuseumRequest extends FormRequest
         return [
             'museum.name'=> 'required',
             'museum.place'=> 'required',
+            'museum.body'=> 'required',
             'museum.time'=> 'nullable',
             'museum.day'=> 'nullable',
             'museum.money'=> 'nullable',

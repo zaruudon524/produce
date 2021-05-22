@@ -1,3 +1,6 @@
+@extends('layouts.app')
+
+@section('content')
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -8,15 +11,24 @@
     </head>
     <body>
         <h1>投稿</h1>
-        <p class='create'>[<a href='/reviews/create'>create</a>]</p>
-       <div class='reviews'>
-             @foreach ($reviews as $review)
-            <div class='review'>
-                <h2><a href="/reviews/{{ $review->id }}">{{ $review->name }}</a>
-               <h3 class='title'>{{ $review->title }}</h3>
-               <p class='body'>{{ $review->body }}</p>
+        @if(Auth::user()->id === 1)
+            <p class='create'>[<a href='/reviews/create'>口コミ作成</a>]</p>
+        @endif
+       <div class='museums'>
+          
+           @foreach($museums as $museum)
+            <div class='museum'>
+                @if(isset($museum))
+                <h2><a href="/review/{{ $museum->id }}">{{ $museum->name }}</a></br>
+                <p class='place'>場所</p>
+                <p class='place'>{{ $museum->place }}</p>
+                <p class='body'>属性</p>
+                <p class='body'>{{ $museum->body }}</p>
+                @endif
             </div>
-            @endforeach   
+            @endforeach
+        
        </div>
     </body>
 </html>
+ @endsection

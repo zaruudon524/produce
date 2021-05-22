@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBookmarkTables extends Migration
+class CreateBookmarkTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,8 +15,8 @@ class CreateBookmarkTables extends Migration
     {
         Schema::create('bookmark_tables', function (Blueprint $table) {
             $table->Increments('id');
-            $table->integer('museums_id');
-            $table->string('title');
+            $table->integer('museum');
+            $table->integer('museum_id');
             $table->timestamps();
         });
     }

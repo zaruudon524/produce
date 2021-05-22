@@ -1,9 +1,11 @@
-<!DOCTYPE html>
+@extends('layouts.app')
+
+@section('content')
+    <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Museum</title>
+ <title>Museum</title>
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     </head>
@@ -14,15 +16,17 @@
             @csrf
             @method('DELETE')
             <input type="submit" style="display:none">
-            <p class='delete'>[<span onclick="return deletePost(this);">delete</span>]</p>
+            <!--<p class='delete'>[<span onclick="return deletePost);">delete</span>]</p>-->
         </form>
             <div class='review'>
                 <h2 class='name'>{{ $review->name }}</h2>
+                
+                
                 <h2 class='title'>{{ $review->title }}</h2>
                 <p class='body'>{{ $review->body }}</p>
                 <p class='updated_at'>{{ $review->updated_at }}</p>
             </div>
-            <div class="back">[<a href="/">back</a>]</div>
+            <div class="back">[<a href="/public/">back</a>]</div>
             <script>
                 function deletePost(e) {
                     'use strict';
@@ -31,5 +35,7 @@
                     }
                 }
             </script>
-    </body>
+        </body>
 </html>
+    @endsection
+

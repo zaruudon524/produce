@@ -36,4 +36,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+    
+
+    public function museums()
+    {
+        return $this->belongsToMany('App\Museum')->withTimestamps();
+        
+        $user = App\User::find(museumId);
+    }
+    
 }
