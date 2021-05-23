@@ -9,6 +9,7 @@ use App\Http\Requests\MuseumRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Tag;
+use Abraham\TwitterOAuth\TwitterOAuth;
 
 
 class MuseumController extends Controller
@@ -24,8 +25,6 @@ class MuseumController extends Controller
         return view('museums.show')->with(['museum' => $museum, 'isBookmarked' =>$isBookmarked]);
     }
 
-
-
     public function create()
     {
         return view('museums.create');
@@ -35,10 +34,41 @@ class MuseumController extends Controller
     {
         $input = $request['museum'];
         $museum->fill($input)->save();
-         
+        
+        $twitter = new TwitterOAuth(env('TWITTER_API_KEY'),
+        env('TWITTER_API_SECRET'),
+        env('TWITTER_API_KEY_ACCESS_TOKEN'),
+        env('TWITTER_API_KEY_ACCESS_TOKEN_SECRET'));
+        
+        $twitter->post("statuses/update", ["status"=>'Ok']);
+            // "status" =>
+            // '新しい博物館の情報が投稿されました！！' . PHP_EOL .
+            // '「'.$museum->place .' / '. $museum->name .'」' . PHP_EOL .
+            // ''.$museum->body.'' . PHP_EOL .
+            // '#博物館　#'.$museum->place.' #'.$museum->name.' #'.$museum->body.'' . PHP_EOL .
+            // 'http:' . $id
+            
+         dd($twitter);
         return redirect('/museums/' . $museum->id);
         
+        
     }
+    
+    // public function tweet(Request $request)
+    // {
+    //     $twitter = new TwitterOAuth(env('TWITTER_API_KEY'),
+    //     env('TWITTER_API_SECRET'),
+    //     env('TWITTER_API_KEY_ACCESS_TOKEN'),
+    //     env('TWITTER_API_KEY_ACCESS_TOKEN_SECRET'));
+        
+    //     $twitter->post("statuses/update", [
+    //         "status" =>
+    //         '新しい博物館の情報が投稿されました！！' . PHP_EOL .
+    //         '「'.$museum->place .' / '. $museum->name .'」' . PHP_EOL .
+    //         ''.$museum->body.'' . PHP_EOL .
+    //         '#博物館　#'.$museum->place.' #'.$museum->name.' #'.$museum->body.'' . PHP_EOL .
+    //         // 'http:' . $id
+    //     ]);
     
     public function edit(Museum $museum)
     {
