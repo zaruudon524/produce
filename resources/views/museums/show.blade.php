@@ -16,23 +16,7 @@
             <p class="edit">[<a href="/museums/{{ $museum->id }}/edit">edit</a>]</p>
             <input type="submit" style="display:none">
         @endif
-            @if($isBookmarked)
-             <div>
-                <form action="/museums/{{ $museum->id }}/deletebookmark" method="POST">
-                    @method('PUT')
-                    @csrf
-                    <input type="submit" value="&#xf164;いいね取り消し" class="fas btn btn-danger">
-                </form>
-            </div>
-            @else
-            <div>
-                <form action="/museums/{{ $museum->id }}/bookmark" method="POST">
-                    @method('PUT')
-                    @csrf
-                <input type="submit" value="&#xf164;いいね" class="fas btn btn-success">
-                </form>
-            </div>
-            @endif
+            
 
             <div class='museums'>
                 <h3 class='tag'>{{ $museum->tag }}</h3>
