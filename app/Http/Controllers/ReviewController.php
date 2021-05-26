@@ -18,7 +18,7 @@ class ReviewController extends Controller
     public function show(Review $review, Museum $museum)
     {
         $museums = $museum ->get();
-        $review=$museum->museums()->where('museum_id');
+        // $review=$museum->museums()->where('museum_id');
         // $museum = $review -> where('museum_id');
         return view('reviews.show')->with(['review' => $review, 'museums' => $museum]);
     }

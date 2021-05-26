@@ -29,6 +29,7 @@ class HomeController extends Controller
      */
     public function index(Museum $museum)
     {
+        $museums = Museum::orderBy('name', 'asc')->get();
         return view('index')->with(['museums' => $museum ->get()]);
     }
     

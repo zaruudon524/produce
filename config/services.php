@@ -30,4 +30,10 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'twitter' => [
+        'API_KEY' => env('TWITTER_API_KEY'),
+        'API_SECRET' => env('TWITTER_API_SECRET'),
+        'API_KEY_ACCESS_TOKEN' => env('TWITTER_API_KEY_ACCESS_TOKEN'),
+        'API_KEY_ACCESS_TOKEN_SECRET' => env('TWITTER_API_KEY_ACCESS_TOKEN_SECRET')
+    ]
 ];
