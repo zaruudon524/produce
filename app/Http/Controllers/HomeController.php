@@ -36,18 +36,18 @@ class HomeController extends Controller
     public function show(Museum $museum, Review $review)
     {
         $reviews = $review ->get();
-         $museums = $museum ->get();
+        //  $museums = $museum ->get();
         // $review=$museum->museums()->where('museum_id');
         $isBookmarked=$museum->users()->where('user_id', Auth::id())->exists();
         // $reviews = $museum -> where('museum_id');
         return view('show')->with(['museum' => $museum, 'reviews' => $reviews, 'isBookmarked' =>$isBookmarked]);
     }
     
-    public function comment(Review $review)
-    {
-        $reviews = $review -> where('museum_id');
-        return view('show')->with(['reviews' => $reviews]);
-    }
+    // public function comment(Review $review)
+    // {
+    //     $reviews = $review -> where('museum_id');
+    //     return view('show')->with(['reviews' => $reviews]);
+    // }
     
     public function deletebookmark(Museum $museum)
     {

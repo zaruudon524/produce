@@ -17,7 +17,7 @@ Route::get('/reviews/create/{museum}', 'ReviewController@create')->middleware('a
 Route::get('/reviews/{review}/edit', 'ReviewController@edit')->middleware('auth');
 Route::put('/reviews/{review}', 'ReviewController@update')->middleware('auth');;
 Route::delete('/reviews/{review}', 'ReviewController@delete')->middleware('auth');
-Route::get('/reviews/{review}', 'ReviewController@show')->middleware('auth');
+Route::get('/reviews/{review}/', 'ReviewController@show')->middleware('auth');
 Route::post('/reviews/{museum}', 'ReviewController@store')->middleware('auth');
 
 Route::get('/museums', 'MuseumController@index')->middleware('auth');
@@ -37,5 +37,9 @@ Route::delete('/public/{museum}', 'HomeController@delete');
 Route::post('/public/{museum}/deletebookmark', 'HomeController@deletebookmark');
 Route::get('/public/{museum}/', 'HomeController@show')->middleware('auth');
 Route::post('/public/search', 'HomeController@search')->middleware('auth');
-Route::get('/public/{review}/', 'HomeController@comment');
 Route::put('/public/{museum}/bookmark', 'HomeController@bookmark');
+
+Route::get('/mail', 'ContactController@index')->name('contact');
+Route::get('/confirm', 'ContactController@confirm')->name('confirm');
+Route::post('/process', 'ContactController@process')->name('process');
+Route::get('/complete', 'ContactController@complete')->name('complete');

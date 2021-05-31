@@ -10,6 +10,7 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     </head>
     <body>
+        @include("layouts.header")
         <h1>ホーム</h1>
         <!--<p class='create'>[<a href='/reviews/create'>create</a>]</p>-->
     
@@ -35,6 +36,11 @@
         </div>   
          </div>   
        </div>
+       <div class='mail'>
+           <a href="/mail">お問い合わせ</a>
+        </div>
+           
+       @include("layouts.footer", [] )
     </body>
 </html>
 @endsection

@@ -39,9 +39,9 @@
                 
                 @foreach($reviews as $review)
                     <div class='review'>
-                        <p class='title'>タイトル</p>
+                        <!--<p class='title'>タイトル</p>-->
                         <p class='title'>{{ $review->title }}</p>
-                        <p class='body'>本文</p>
+                        <!--<p class='body'>本文</p>-->
                         <p class='body'>{{ $review->body }}</p>
                     </div>
                 @endforeach

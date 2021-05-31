@@ -19,9 +19,7 @@
             <!--<p class='delete'>[<span onclick="return deletePost);">delete</span>]</p>-->
         </form>
             <div class='review'>
-                <h2 class='name'>{{ $review->name }}</h2>
-                
-                
+                <!--<h2 class='name'>{{ $review->name }}</h2>-->
                 <h2 class='title'>{{ $review->title }}</h2>
                 <p class='body'>{{ $review->body }}</p>
                 <p class='updated_at'>{{ $review->updated_at }}</p>
