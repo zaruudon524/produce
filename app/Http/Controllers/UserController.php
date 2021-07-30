@@ -14,4 +14,9 @@ use Illuminate\Support\Facades\Auth;
         $museum=Museum::find($museumId);
         $museum->users()->attach($userId);
     }
+    
+    // public function history()
+    // {
+    //     $reviews=User::find($userId);
+    // }
 }

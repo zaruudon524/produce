@@ -1,21 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Museum</title>
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-    </head>
-    <body>
         <h1>博物館</h1>
             @if($isBookmarked)
              <div>
                 <form action="/public/{{ $museum->id }}/deletebookmark" method="POST">
-                    @method('PUT')
+                    @method('POST')
                     @csrf
                     <input type="submit" value="&#xf164;いいね取り消し" class="fas btn btn-danger">
                 </form>
@@ -29,7 +19,8 @@
                 </form>
             </div>
             @endif
-
+            
+            
             <div class='museums'>
                 <h3 class='tag'>{{ $museum->tag }}</h3>
                 <h2 class='name'>{{ $museum->name }}</h2>
@@ -72,7 +63,5 @@
                     }
                 }
             </script>
-    </body>
-</html>
-
+@include("layouts.footer" )
 @endsection

@@ -1,14 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <title>Museum</title>
-    </head>
-    
-    <body>
         <h1 class="title">編集</h1>
         <div class="content">
              <form action="/museums/{{ $museum->id }}" method="POST">
@@ -62,6 +54,4 @@
             </form>
         </div>
         <div class="back">[<a href="/">back</a>]</div>
-    </body>
-</html>
  @endsection

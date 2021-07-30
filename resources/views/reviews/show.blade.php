@@ -1,15 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
- <title>Museum</title>
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-    </head>
-    <body>
+   
         <h1>投稿</h1
         <p class="edit">[<a href="/reviews/{{ $review->id }}/edit">edit</a>]</p>
         <form action="/reviews/{{ $review->id }}"  id="form_delete" method="post">
@@ -23,6 +15,7 @@
                 <h2 class='title'>{{ $review->title }}</h2>
                 <p class='body'>{{ $review->body }}</p>
                 <p class='updated_at'>{{ $review->updated_at }}</p>
+                <!--<input type="hidden" name="userid" value="" />-->
             </div>
             <div class="back">[<a href="/public/">back</a>]</div>
             <script>
@@ -33,7 +26,5 @@
                     }
                 }
             </script>
-        </body>
-</html>
     @endsection
 

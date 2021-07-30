@@ -41,9 +41,12 @@ class User extends Authenticatable
 
     public function museums()
     {
-        return $this->belongsToMany('App\Museum')->withTimestamps();
-        
-        $user = App\User::find(museumId);
+        return $this->belongsToMany('App\Museum');
+    }
+    
+    public function reviews()
+    {
+        return $this->belongsToMany('App\Review');
     }
     
 }

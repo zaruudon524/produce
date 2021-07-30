@@ -49,6 +49,7 @@ class MuseumController extends Controller
             // 'http:' . $id
             
         //  dd($twitter);
+        
         return redirect('/museums/' . $museum->id);
     }
     

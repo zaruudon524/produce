@@ -1,16 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Museum</title>
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-    </head>
-    <body>
         <h1>博物館</h1>
         @if(Auth::user()->id === 1)
             <p class="edit">[<a href="/museums/{{ $museum->id }}/edit">edit</a>]</p>
@@ -41,7 +31,7 @@
                 <button type="submit">削除</button> 
             </form>
             @endif
-            <div class="back">[<a href="/museums">back</a>]</div>
+            <div class="back">[<a href="/public">back</a>]</div>
             <script>
                 function deleteMuseum(e) {
                     'use strict';
@@ -50,6 +40,4 @@
                     }
                 }
             </script>
-    </body>
-</html>
  @endsection

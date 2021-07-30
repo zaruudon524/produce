@@ -34,13 +34,14 @@
                 <p class='body'>{{ $museum->body }}</p>
                 @endif
             </div>
-             @endforeach
+            @endforeach
                <div class="back">[<a href="/">back</a>]</div>
            
         </div>   
-         <div class='reviews'>
-         </div>
        </div>
+       {{ $museums->links() }}
+
     </body>
 </html>
+@include("layouts.footer" )
 @endsection
