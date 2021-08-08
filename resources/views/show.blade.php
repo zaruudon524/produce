@@ -46,14 +46,33 @@
                 <p class='homepage'>{{ $museum->homepage }}</p>
                 <p class='other'>{{ $museum->other }}</p>
                 <p class='updated_at'>{{ $museum->updated_at }}</p>
-            </div>
-             @if(Auth::user()->id === 1)
-            <form action="/public/{{ $museum->id }}" id="form_{{ $museum->id }}" method="post" style="display:inline">
-            @csrf
-            @method('DELETE')
-                <button type="submit">削除</button> 
-            </form>
-            @endif
+                
+            <!--//     <script src="{{ asset('/js/result.js') }}"></script>-->
+            <!--//     <div id="map" style="height:500px"></div>-->
+            <!--//     <script src="https://maps.googleapis.com/produce/api/js?language=ja&region=JP&key=AIzaSyCzIo_zYkdzG7ttnjn_o1HE7SLlzPZabwo&callback=initMap" async defer>-->
+	           <!-- </script>-->
+	            
+	           <!--画像表示-->
+                @if(file_exists(public_path().'/storage/post_img/'. $review->id .'.jpg'))
+                    <img src="/storage/post_img/{{ $review->id }}.jpg">
+                @elseif(file_exists(public_path().'/storage/post_img/'. $review->id .'.jpeg'))
+                    <img src="/storage/post_img/{{ $review->id }}.jpeg">
+                @elseif(file_exists(public_path().'/storage/post_img/'. $review->id .'.png'))
+                    <img src="/storage/post_img/{{ $review->id }}.png">
+                @elseif(file_exists(public_path().'/storage/post_img/'. $review->id .'.gif'))
+                    <img src="/storage/post_img/{{ $review->id }}.gif">
+                @endif<br>
+	            
+                 @if(Auth::user()->id === 1)
+                <form action="/public/{{ $museum->id }}" id="form_{{ $museum->id }}" method="post" style="display:inline">
+                @csrf
+                @method('DELETE')
+                    <button type="submit">削除</button><br>
+                </form>
+                @endif
+            
+            
+            
             <div class="back">[<a href="/public">back</a>]</div>
             <script>
                 function deleteMuseum(e) {

@@ -6,6 +6,7 @@ use App\Review;
 use App\Museum;
 use App\User;
 use Illuminate\Http\Request;
+use App\Http\Requests\ReviewRequest;
 use Illuminate\Support\Facades\DB;
 
 
@@ -27,14 +28,6 @@ class ReviewController extends Controller
         return view('reviews.show')->with(['review' => $review, 'museums' => $museum, 'user' =>$user]);
     }
     
-    // public function history(Review $reviews, Museum $museum, User $user)
-    // {
-    //     //  $reviews = Museum::find($museum->id)->reviews->get;
-    //     $reviews= $museum -> review()->get();
-    //     // $museums = $user->museums(); 
-    //     return view(history)->with(['musums'=>$museum, 'reviews'=>$reviews]);
-    // }
-    
     public function history(User $user, Review $review)
     {
         $reviews = $user->reviews()->get(); 
@@ -42,21 +35,21 @@ class ReviewController extends Controller
         return view('reviews.history')->with(['reviews'=>$reviews]);
     }
     
-    public function addhistory(Review $review)
-    {
-        $user=user()::find(Auth::id);
-        $usr->reviews()->attach($review);
-        // $review=user()->attach(Auth::id());
-        // $addhistory=$review->users()->where('user_id', Auth::id());
-        return redirect('/reviews/' . $user->id . history);
-    }
+    // public function addhistory(Review $review)
+    // {
+    //     $user=user()::find(Auth::id);
+    //     $usr->reviews()->attach($review);
+    //     // $review=user()->attach(Auth::id());
+    //     // $addhistory=$review->users()->where('user_id', Auth::id());
+    //     return redirect('/reviews/' . $user->id . history);
+    // }
     
     public function create(Museum $museum)
     {
         return view('reviews.create')->with(['museum' => $museum]);
     }
 
-    public function store(Review $review, Request $request, Museum $museum, User $user)
+    public function store(Review $review, ReviewRequest $request, Museum $museum, User $user)
     {
         $input = $request['review'];
         // 入力情報全取得
@@ -69,6 +62,16 @@ class ReviewController extends Controller
         $review->user_id=$request->user()->id;
         //リレーション、user_idを渡す
         $review->fill($input)->save();
+        
+        // 画像の保存
+        if($request->post_img){
+        if($request->post_img->extension() == 'gif' || $request->post_img->extension() == 'jpeg' || $request->post_img->extension() == 'jpg' || $request->post_img->extension() == 'png'){
+        $request->file('post_img')->storeAs('public/post_img', $review->id.'.'.$request->post_img->extension());
+        }
+        }
+        
+        $img = $request->post_img;
+
         return redirect('/public/' . $museum->id);
     }
     

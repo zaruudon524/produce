@@ -14,7 +14,7 @@
 Route::get('/', 'HomeController@search')->middleware('auth');
 Route::get('/reviews', 'ReviewController@index');
 Route::get('/reviews/{user}/history', 'ReviewController@history')->name('history');
-Route::put('/reviews/{user}/addhistory, ReviewController@addhistory');
+// Route::put('/reviews/{user}/addhistory, ReviewController@addhistory');
 Route::get('/reviews/create/{museum}', 'ReviewController@create')->middleware('auth');
 Route::get('/reviews/{review}/edit', 'ReviewController@edit')->middleware('auth');
 Route::put('/reviews/{review}', 'ReviewController@update')->middleware('auth');;

@@ -25,6 +25,6 @@ public function museums()
   public function users()
   {
     $reviews=App\User::find(review_id)->reviews();
-    return $this->belongsToMany('App\User');
+    return $this->belongsTo('App\User');
   }
 }
