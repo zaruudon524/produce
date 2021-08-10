@@ -14,6 +14,7 @@
                 <h2 class='place'>{{ $museum->place }}</h2>
                 
                 <h2 class='body'>{{ $museum->body }}</h2>
+                <h2 class='address'>{{ $museum->address }}</h2>
                 <p class='time'>{{ $museum->time }}</p>
                 <p class='day'>{{ $museum->day }}</p>
                 <p class='money'>{{ $museum->money }}</p>

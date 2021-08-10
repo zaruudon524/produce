@@ -18,6 +18,7 @@ class CreateMuseumsTable extends Migration
             $table->char('name', 100);
             $table->char('place', 100);
             $table->text('body', 300);
+            $table->text('address');
             $table->char('time', 100)->nullable();
             $table->char('day', 100)->nullable();
             $table->char('money', 100)->nullable();
@@ -26,10 +27,9 @@ class CreateMuseumsTable extends Migration
             $table->char('tel', 100)->nullable();
             $table->char('homepage', 100)->nullable();
             $table->char('other', 100)->nullable();
-            $table->timestamps();
             
             $table->softDeletes();
-    
+            $table->timestamps();
         });
     }
 
@@ -40,6 +40,6 @@ class CreateMuseumsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('museum');
+        Schema::dropIfExists('museums');
     }
 }

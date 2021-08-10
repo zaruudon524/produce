@@ -24,6 +24,11 @@
                 <input type="text" name="museum[body]" placeholder="属性" value="{{ old('museum.body') }}"/><br>
                 <p class="body__error" style="color:red">{{ $errors->first('museum.body') }}</p>
             </div>
+            
+            <div class="address">
+                <h2>住所</h2>
+                <textarea name="museum[address]" placeholder="住所"></textarea>
+            </div>
             <div class="time">
                 <h2>開館時間</h2>
                 <textarea name="museum[time]" placeholder="時間"></textarea>

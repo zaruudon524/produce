@@ -15,6 +15,7 @@ class Museum extends Model
     'name',
     'place',
     'body',
+    'address',
     'time',
     'day',
     'money',

@@ -37,6 +37,7 @@
                     </div>
                 @endforeach
                 
+                <h2 class='address'>{{ $museum->address }}</p>
                 <p class='time'>{{ $museum->time }}</p>
                 <p class='day'>{{ $museum->day }}</p>
                 <p class='money'>{{ $museum->money }}</p>
@@ -46,6 +47,9 @@
                 <p class='homepage'>{{ $museum->homepage }}</p>
                 <p class='other'>{{ $museum->other }}</p>
                 <p class='updated_at'>{{ $museum->updated_at }}</p>
+                
+                <iframe id='map' src='https://www.google.com/maps/embed/v1/place?key= AIzaSyCzIo_zYkdzG7ttnjn_o1HE7SLlzPZabwo&q={{ $museum->address }}'
+                width='50%' height='300' frameborder='0'></iframe>
                 
             <!--//     <script src="{{ asset('/js/result.js') }}"></script>-->
             <!--//     <div id="map" style="height:500px"></div>-->
@@ -70,7 +74,6 @@
                     <button type="submit">削除</button><br>
                 </form>
                 @endif
-            
             
             
             <div class="back">[<a href="/public">back</a>]</div>

@@ -17,7 +17,7 @@
             </div>
             
             <p>画像をアップロード</p>
-            <input type="file" name="post_img" value="{{ old('review.title')}}"/>
+            <input type="file" name="post_img" value="{{ old('post_img')}}"/>
             <p class="body__error" style="color:red">{{ $errors->first('post_img') }}</p>
 
             

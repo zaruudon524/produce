@@ -19,6 +19,10 @@
                     <input type='text' name='museum[body]' value="{{ $museum->body }}">
                 </div>
                 <div class='content__time'>
+                    <h2>開館時間</h2>
+                    <input type='text' name='museum[address]' value="{{ $museum->address }}">
+                </div>
+                <div class='content__time'>
                     <h2>会館時間</h2>
                     <input type='text' name='museum[time]' value="{{ $museum->time }}">
                 </div>

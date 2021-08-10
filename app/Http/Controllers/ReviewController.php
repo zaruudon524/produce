@@ -67,10 +67,7 @@ class ReviewController extends Controller
         if($request->post_img){
         if($request->post_img->extension() == 'gif' || $request->post_img->extension() == 'jpeg' || $request->post_img->extension() == 'jpg' || $request->post_img->extension() == 'png'){
         $request->file('post_img')->storeAs('public/post_img', $review->id.'.'.$request->post_img->extension());
-        }
-        }
-        
-        $img = $request->post_img;
+        }}
 
         return redirect('/public/' . $museum->id);
     }

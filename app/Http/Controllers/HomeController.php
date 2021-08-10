@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\ContactController;
 use Illuminate\Http\Request;
-// use App\Http\Requests\ReviewRequest;
+use App\Http\Requests\ReviewRequest;
 use App\Museum;
 use App\Review;
 use App\User;
@@ -38,7 +38,6 @@ class HomeController extends Controller
     {
         $reviews = Museum::find($museum->id)->reviews;
         $isBookmarked=$museum->users()->where('user_id', Auth::id())->exists();
-        // $img = $request->post_img;
         
         return view('show')->with(['museum' => $museum, 'reviews' => $reviews, 'isBookmarked' =>$isBookmarked]);
     }
