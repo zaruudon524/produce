@@ -4,7 +4,7 @@
         <h1>投稿</h1>
        <form action="/reviews/{{ $museum->id }}" method="POST" enctype="multipart/form-data">
            @csrf
-          <h2 class='name'>{{ $museum->name }}</h2>
+            <h2 class='name'>{{ $museum->name }}</h2>
             <div class="title">
                 <h3>タイトル</h3>
                 <input type="text" name="review[title]" placeholder="場所" value="{{ old('review.title') }}"/><br>

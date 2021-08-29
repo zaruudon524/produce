@@ -3,10 +3,12 @@
 @section('content')
     <h1>投稿履歴</h1>
    
-    <!--<h2 class='name'></h2>-->
-    
+   <!--博物館名表示-->
     @foreach($reviews as $review)
         <div class='review'>
+            @foreach($museumnames as $museumname)
+            @endforeach
+            <a href="/public/{{ $museumname->id }}">{{ $museumname->name }}</a>
             <p class='title'>{{ $review->title }}</p>
             <p class='body'>{{ $review->body }}</p>
         </div>

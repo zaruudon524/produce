@@ -12,7 +12,8 @@
     <body>
         <h1>ホーム</h1>
         <!--<p class='create'>[<a href='/reviews/create'>create</a>]</p>-->
-    
+        
+        
        <div class=search>
            <!--<form action="/reviews" method="POST">-->
            <!--<input name="search" type="text" placeholder="キーワードを入力" value=" ''}}">-->
@@ -23,19 +24,23 @@
            @if(Auth::user()->id === 1)
             <p class='create'>[<a href='/museums/create'>投稿作成</a>]</p>
            @endif 
-          
+            
+            <!--博物館登録件数-->
+            @foreach($allnumbers as $allnumber)
+            @endforeach
+            <p class='number'>全{{ $allnumbers->id }}件</p>
+        
            @foreach($museums as $museum)
             <div class='museum'>
-                 @if(isset($museum))
                 <a href="/public/{{ $museum->id }}">{{ $museum->name }}</a></br>
                 <p class='place'>場所</p>
                 <p class='place'>{{ $museum->place }}</p>
                 <p class='body'>属性</p>
                 <p class='body'>{{ $museum->body }}</p>
-                @endif
             </div>
             @endforeach
-               <div class="back">[<a href="/">back</a>]</div>
+            
+        <div class="back">[<a href="/">back</a>]</div>
            
         </div>   
        </div>

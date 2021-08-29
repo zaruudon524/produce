@@ -22,11 +22,20 @@
             
             
             <div class='museums'>
-                <h3 class='tag'>{{ $museum->tag }}</h3>
                 <h2 class='name'>{{ $museum->name }}</h2>
                 <h2 class='place'>{{ $museum->place }}</h2>
                 <h2 class='body'>{{ $museum->body }}</h2>
                 <p class='create'>[<a href='/reviews/create/{{ $museum->id }}'>口コミ作成</a>]</p></br>
+                
+                @if($reviews->isEmpty())
+                
+                <a href="/public/{{ $museum->id }}"></a>
+                <!--からの場合の処理-->
+                @else
+                <p class='user_name'>{{ $review->name }}</p>
+                <!--ユーザーネーム表示-->
+                <!--空じゃない場合の処理-->
+                @endif
                 
                 @foreach($reviews as $review)
                     <div class='review'>
@@ -48,15 +57,14 @@
                 <p class='other'>{{ $museum->other }}</p>
                 <p class='updated_at'>{{ $museum->updated_at }}</p>
                 
-                <iframe id='map' src='https://www.google.com/maps/embed/v1/place?key= AIzaSyCzIo_zYkdzG7ttnjn_o1HE7SLlzPZabwo&q={{ $museum->address }}'
+                <!--googlemap api-->
+                <iframe id='map' src='https://www.google.com/maps/embed/v1/place?key= {{ config("services.google-map.apikey") }}&q={{ $museum->address }}'
                 width='50%' height='300' frameborder='0'></iframe>
+                <!--AIzaSyCzIo_zYkdzG7ttnjn_o1HE7SLlzPZabwo-->
                 
-            <!--//     <script src="{{ asset('/js/result.js') }}"></script>-->
-            <!--//     <div id="map" style="height:500px"></div>-->
-            <!--//     <script src="https://maps.googleapis.com/produce/api/js?language=ja&region=JP&key=AIzaSyCzIo_zYkdzG7ttnjn_o1HE7SLlzPZabwo&callback=initMap" async defer>-->
-	           <!-- </script>-->
-	            
+                
 	           <!--画像表示-->
+	            @foreach($reviews as $review)
                 @if(file_exists(public_path().'/storage/post_img/'. $review->id .'.jpg'))
                     <img src="/storage/post_img/{{ $review->id }}.jpg">
                 @elseif(file_exists(public_path().'/storage/post_img/'. $review->id .'.jpeg'))
@@ -66,8 +74,14 @@
                 @elseif(file_exists(public_path().'/storage/post_img/'. $review->id .'.gif'))
                     <img src="/storage/post_img/{{ $review->id }}.gif">
                 @endif<br>
+                @endforeach
+                
+                <!--編集-->
+	            @if(Auth::user()->id === 1)
+	            <p class="edit">[<a href="/public/{{ $museum->id }}/edit">edit</a>]</p>
+	            @endif
 	            
-                 @if(Auth::user()->id === 1)
+                @if(Auth::user()->id === 1)
                 <form action="/public/{{ $museum->id }}" id="form_{{ $museum->id }}" method="post" style="display:inline">
                 @csrf
                 @method('DELETE')

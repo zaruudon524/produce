@@ -28,23 +28,24 @@ class ReviewController extends Controller
         return view('reviews.show')->with(['review' => $review, 'museums' => $museum, 'user' =>$user]);
     }
     
-    public function history(User $user, Review $review)
+    public function history(User $user, Review $review, Museum $museum)
     {
-        $reviews = $user->reviews()->get(); 
-        // $reviews = $user->reviews()->paginate(5);
-        return view('reviews.history')->with(['reviews'=>$reviews]);
+        $reviews = $user->reviews()->get();
+        // $museums = $review->museums()->get();
+        // 博物館名表示
+        // $review = Review::select(['id']);
+        $museumnames = Museum::with('reviews');
+        $museumnames = Museum::select(['id', 'name'])->get();
+        
+        // $reviews = Review::select(['title', 'body'])->get();
+        // dd($museumnames);
+        
+        $museums = $museum ->get();
+        return view('reviews.history')->with(['reviews'=>$reviews, 'museums'=>$museums, 'museumnames'=>$museumnames]);
     }
     
-    // public function addhistory(Review $review)
-    // {
-    //     $user=user()::find(Auth::id);
-    //     $usr->reviews()->attach($review);
-    //     // $review=user()->attach(Auth::id());
-    //     // $addhistory=$review->users()->where('user_id', Auth::id());
-    //     return redirect('/reviews/' . $user->id . history);
-    // }
     
-    public function create(Museum $museum)
+    public function create(Museum $museum, Review $review, User $user)
     {
         return view('reviews.create')->with(['museum' => $museum]);
     }
@@ -59,7 +60,12 @@ class ReviewController extends Controller
         // $input['user_id']=$review->Auth::id;
         // $reviews=$user->reviews;
         // $input['user_id']=$user->id
+        
+        // $review->museum_id=$request->museums()->id;
+        // $review->museums->name = $request->name;
+        
         $review->user_id=$request->user()->id;
+        
         //リレーション、user_idを渡す
         $review->fill($input)->save();
         

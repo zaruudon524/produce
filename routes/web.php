@@ -41,6 +41,8 @@ Route::get('/public/{museum}/', 'HomeController@show')->middleware('auth');
 Route::post('/public/search', 'HomeController@search')->middleware('auth');
 Route::put('/public/{museum}/bookmark', 'HomeController@bookmark');
 Route::get('/public/{user}/good', 'HomeController@good')->name('good');
+Route::get('/public/{museum}/edit', 'HomeController@edit');
+Route::put('/public/{museum}/', 'HomeController@update');
 
 // Route::get('/mail', 'ContactController@index')->name('contact');
 // Route::get('/confirm', 'ContactController@confirm')->name('confirm');

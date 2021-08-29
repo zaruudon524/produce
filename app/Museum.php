@@ -48,20 +48,27 @@ class Museum extends Model
     //     return $this->belongsToMany('App\Tag', museum_tags);
     // }
     
-    public static function scopeSearch($search)
+    // public static function scopeSearch($search)
+    // {
+    //     return self::where('name', 'like', '%' . $search . '%')
+    //         ->orwhere('place',  'like', '%' . $search . '%')
+    //         ->orwhere('body',  'like', '%' . $search . '%');
+    // }
+     
+    public static function prefecture($prefecture)
     {
-        return self::where('name', 'like', '%' . $search . '%')
-            ->orwhere('place',  'like', '%' . $search . '%')
-            ->orwhere('body',  'like', '%' . $search . '%');
-            
-        // return $->where(function($query) use ($search){
-        //     $query->where('name', 'like', '%' . $search . '%')
-        //     ->orwhere('place',  'like', '%' . $search . '%')
-        //     ->orwhere('body',  'like', '%' . $search . '%');
-    // });
-       
-   
-     }
+        return self::where('place', 'like', '%' . $prefecture . '%');
+    }
+    
+    public static function museumkind($museumkind)
+    {
+        return self::where('body', 'like', '%' . $museumkind . '%');
+    }
+    
+    public static function museumname($museumname)
+    {
+        return self::where('name', 'like', '%' . $museumname . '%');
+    }
      
      public function reviews()
     {

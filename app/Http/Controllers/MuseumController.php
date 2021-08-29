@@ -54,18 +54,18 @@ class MuseumController extends Controller
     }
     
     
-    public function edit(Museum $museum)
-    {
-        return view('museums.edit')->with(['museum' => $museum]);
-    }
+    // public function edit(Museum $museum)
+    // {
+    //     return view('museums.edit')->with(['museum' => $museum]);
+    // }
     
-    public function update(Request $request, Museum $museum)
-    {
-        $input_museum = $request['museum'];
-        $museum->fill($input_museum)->save();
+    // public function update(Request $request, Museum $museum)
+    // {
+    //     $input_museum = $request['museum'];
+    //     $museum->fill($input_museum)->save();
         
-        return redirect('/museums/' . $museum->id);
-    }
+    //     return redirect('/museums/' . $museum->id);
+    // }
     
     public function delete(Museum $museum)
     {

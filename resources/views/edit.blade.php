@@ -3,7 +3,7 @@
 @section('content')
         <h1 class="title">編集</h1>
         <div class="content">
-             <form action="/museums/{{ $museum->id }}" method="POST">
+             <form action="/public/{{ $museum->id }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class='content__name'>
@@ -18,12 +18,13 @@
                     <h2>属性</h2>
                     <input type='text' name='museum[body]' value="{{ $museum->body }}">
                 </div>
-                <div class='content__time'>
-                    <h2>開館時間</h2>
+                <div class='content__address'>
+                    <h2>住所</h2>
                     <input type='text' name='museum[address]' value="{{ $museum->address }}">
                 </div>
+                
                 <div class='content__time'>
-                    <h2>会館時間</h2>
+                    <h2>開館時間</h2>
                     <input type='text' name='museum[time]' value="{{ $museum->time }}">
                 </div>
                 <div class='content__day'>

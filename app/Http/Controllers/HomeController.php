@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\ContactController;
 use Illuminate\Http\Request;
 use App\Http\Requests\ReviewRequest;
+use App\Http\Requests\MuseumRequest;
 use App\Museum;
 use App\Review;
 use App\User;
@@ -30,8 +31,8 @@ class HomeController extends Controller
      */
     public function index(Museum $museum)
     {
-        $museums = Museum::orderBy('name', 'asc')->get();
-        return view('index')->with(['museums' => $museum ->getPaginateByLimit()]);
+        $allnumbers = Museum::latest()->first();
+        return view('index')->with(['museums' => $museum ->getPaginateByLimit(), 'allnumbers' => $allnumbers]);
     }
     
     public function show(Museum $museum, Review $review)
@@ -39,9 +40,17 @@ class HomeController extends Controller
         $reviews = Museum::find($museum->id)->reviews;
         $isBookmarked=$museum->users()->where('user_id', Auth::id())->exists();
         
-        return view('show')->with(['museum' => $museum, 'reviews' => $reviews, 'isBookmarked' =>$isBookmarked]);
+        // ユーザーネーム表示
+        $review = Auth::user()->reviews;
+        $review = Auth::user()->select(['name'])->first();
+        // $reviews->user_id = $request->user()->id;
+        // $review->user->name = $request->user()->name;
+        // dd($reviews);
+        return view('show')->with(['museum' => $museum, 'reviews' => $reviews, 'review'=>$review, 'isBookmarked' =>$isBookmarked]);
     }
-
+    
+    
+    
     public function good(User $user, Museum $museum)
     {
         $museums = $user->museums()->get(); 
@@ -65,13 +74,6 @@ class HomeController extends Controller
         // return view('bookmark')->with(['museums'=>$museum, 'isBookmarked'=>$isBookmarked]);
     }
     
-    // public function history(Review $reviews, Museum $museum, User $user)
-    // {
-    //     //  $reviews = Museum::find($museum->id)->reviews->get;
-    //     $reviews= $museum -> review()->get();
-    //     // $museums = $user->museums(); 
-    //     return view(history)->with(['musums'=>$museum, 'reviews'=>$reviews]);
-    // }
     
     public function search(Request $request)
     {
@@ -84,9 +86,36 @@ class HomeController extends Controller
         // dd($tweets);
 
         // dd($request);
-         $search = $request->search;
-         $museums = Museum::scopeSearch($search)->orderBy('created_at', 'desc')->paginate(10);
-        return view('search')->with(['museums'=>$museums,'search' => $search, 'tweets'=> $tweets]);
+        // 検索
+        // $search = $request->search;
+        // $museums = Museum::scopeSearch($search)->orderBy('created_at', 'desc')->paginate(10);
+         
+        $prefecture = $request->prefecture;
+        $museums = Museum::prefecture($prefecture)->orderBy('created_at', 'desc')->paginate(10);
+        
+        $museumkind = $request->museumkind;
+        $museums = Museum::museumkind($museumkind)->orderBy('created_at', 'desc')->paginate(10);
+        
+        $museumname = $request->museumname;
+        $museums = Museum::museumname($museumname)->orderBy('created_at', 'desc')->paginate(10);
+        
+        // $museumgenre = $request->museumgenre;
+        // $museums = Museum::museumgenre($museumgenre)->orderBy('created_at', 'desc')->paginate(10);
+         
+        return view('search')->with(['museums'=>$museums, 'prefecture'=>$prefecture, 'museumkind' => $museumkind, 'museumname' => $museumname, 'tweets'=> $tweets]);
+    }
+    
+    public function edit(Museum $museum)
+    {
+        return view('edit')->with(['museum' => $museum]);
+    }
+    
+    public function update(MuseumRequest $request, Museum $museum)
+    {
+        $input_museum = $request['museum'];
+        $museum->fill($input_museum)->save();
+        
+        return redirect('/public/' . $museum->id);
     }
     
     public function delete(Museum $museum)
