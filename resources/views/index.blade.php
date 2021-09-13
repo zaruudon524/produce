@@ -14,21 +14,24 @@
         <!--<p class='create'>[<a href='/reviews/create'>create</a>]</p>-->
         
         
-       <div class=search>
-           <!--<form action="/reviews" method="POST">-->
-           <!--<input name="search" type="text" placeholder="キーワードを入力" value=" ''}}">-->
-           <!--<button type="submit">検索</button>-->
-           <!--</form>-->
-            <h1>投稿</h1>
-       <div class='museums'>
+       
+        <h1>投稿</h1>
+        <div class='museums'>
            @if(Auth::user()->id === 1)
             <p class='create'>[<a href='/museums/create'>投稿作成</a>]</p>
            @endif 
-            
+        
+        
             <!--博物館登録件数-->
-            @foreach($allnumbers as $allnumber)
-            @endforeach
-            <p class='number'>全{{ $allnumbers->id }}件</p>
+             @if (count($museums) >0) 
+                <p class='number'>全{{ $museums->total() }}件中</p>
+                <!--データ領域にある、条件に一致するアイテムの総数-->
+                {{  ($museums->currentPage() -1) * $museums->perPage() + 1}} - 
+                {{ (($museums->currentPage() -1) * $museums->perPage() + 1) + (count($museums) -1)  }}件のデータが表示されています。</p>
+                <!--現在の頁数*ページごとに表示するアイテム数-->
+                @else
+                <p>データがありません。</p>
+            @endif
         
            @foreach($museums as $museum)
             <div class='museum'>
@@ -39,12 +42,12 @@
                 <p class='body'>{{ $museum->body }}</p>
             </div>
             @endforeach
-            
+            {{ $museums->links() }}
         <div class="back">[<a href="/">back</a>]</div>
            
         </div>   
        </div>
-       {{ $museums->links() }}
+       
 
     </body>
 </html>

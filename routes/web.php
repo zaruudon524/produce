@@ -34,7 +34,7 @@ Route::resource('/user', 'UserController@index')->middleware('auth');
 
 Auth::routes();
 
-Route::get('/public', 'HomeController@index')->name('home');
+Route::get('/public', 'HomeController@index');
 Route::delete('/public/{museum}', 'HomeController@delete');
 Route::post('/public/{museum}/deletebookmark', 'HomeController@deletebookmark');
 Route::get('/public/{museum}/', 'HomeController@show')->middleware('auth');

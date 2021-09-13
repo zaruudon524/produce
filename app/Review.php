@@ -17,6 +17,7 @@ class Review extends Model
     'user_id'
 ];
 
+
 public function museums()
   {
     $museums = App\Review::find(museum_id)->museums();
@@ -28,4 +29,5 @@ public function museums()
     $reviews=App\User::find(review_id)->reviews();
     return $this->belongsTo('App\User');
   }
+  
 }

@@ -30,18 +30,20 @@ class ReviewController extends Controller
     
     public function history(User $user, Review $review, Museum $museum)
     {
-        $reviews = $user->reviews()->get();
-        // $museums = $review->museums()->get();
+        $reviews = $user->reviews()->paginate(3);
         // 博物館名表示
-        // $review = Review::select(['id']);
-        $museumnames = Museum::with('reviews');
-        $museumnames = Museum::select(['id', 'name'])->get();
         
-        // $reviews = Review::select(['title', 'body'])->get();
-        // dd($museumnames);
+        foreach($reviews as $review){
+            // $reviews=Review::paginate(2);
+        $museum_id = $review->museum_id;
+        $museum_name = optional($museum->find($museum_id))->name;
+        $review->museum_name = $museum_name;
+        // dd($reviews);
         
-        $museums = $museum ->get();
-        return view('reviews.history')->with(['reviews'=>$reviews, 'museums'=>$museums, 'museumnames'=>$museumnames]);
+        }
+        // $museums = $museum ->get();
+        
+        return view('reviews.history')->with(['reviews'=>$reviews]);
     }
     
     

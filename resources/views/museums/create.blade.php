@@ -79,34 +79,34 @@
                     <option value="美術">美術</option>
                     <option value="動・水・植">動・水・植</option>
                 </select><br>
-                <select name="museum[body]" value="{{ old('museum.body') }}">
-                    <option disabled selected value>ジャンル</option>
-                    <option value="考古・歴史・民俗">考古・歴史・民俗</option>
-                    <option value="西洋美術">西洋美術</option>
-                    <option value="日本美術・東洋美術">日本美術・東洋美術</option>
-                    <option value="現代アート">現代アート</option>
-                    <option value="彫刻">彫刻</option>
-                    <option value="写真">写真</option>
-                    <option value="ファッション・着物">ファッション・着物</option>
-                    <option value="立体・工芸">立体・工芸</option>
-                    <option value="版画">版画</option>
-                    <option value="民芸・民具">民芸・民具</option>
-                    <option value="陶磁器">陶磁器</option>
-                    <option value="ガラス">ガラス</option>
-                    <option value="建築">建築</option>
-                    <option value="デザイン">デザイン</option>
-                    <option value="イラスト・絵本・マンガ・アニメ">イラスト・絵本・マンガ・アニメ</option>
-                    <option value="刀">刀</option>
-                    <option value="書">書</option>
-                    <option value="人形・ミニチュア">人形・ミニチュア</option>
-                    <option value="浮世絵">浮世絵</option>
-                    <option value="デジタルアート">デジタルアート</option>
-                    <option value="自然・科学">自然・科学</option>
-                    <option value="映画・映像">映画・映像</option>
-                    <option value="現代アート">現代アート</option>
-                    <option value="彫刻">彫刻</option>
-                    <option value="写真">写真</option>
-            </select><br>
+            <!--    <select name="museum[body]" value="">-->
+            <!--        <option disabled selected value>ジャンル</option>-->
+            <!--        <option value="考古・歴史・民俗">考古・歴史・民俗</option>-->
+            <!--        <option value="西洋美術">西洋美術</option>-->
+            <!--        <option value="日本美術・東洋美術">日本美術・東洋美術</option>-->
+            <!--        <option value="現代アート">現代アート</option>-->
+            <!--        <option value="彫刻">彫刻</option>-->
+            <!--        <option value="写真">写真</option>-->
+            <!--        <option value="ファッション・着物">ファッション・着物</option>-->
+            <!--        <option value="立体・工芸">立体・工芸</option>-->
+            <!--        <option value="版画">版画</option>-->
+            <!--        <option value="民芸・民具">民芸・民具</option>-->
+            <!--        <option value="陶磁器">陶磁器</option>-->
+            <!--        <option value="ガラス">ガラス</option>-->
+            <!--        <option value="建築">建築</option>-->
+            <!--        <option value="デザイン">デザイン</option>-->
+            <!--        <option value="イラスト・絵本・マンガ・アニメ">イラスト・絵本・マンガ・アニメ</option>-->
+            <!--        <option value="刀">刀</option>-->
+            <!--        <option value="書">書</option>-->
+            <!--        <option value="人形・ミニチュア">人形・ミニチュア</option>-->
+            <!--        <option value="浮世絵">浮世絵</option>-->
+            <!--        <option value="デジタルアート">デジタルアート</option>-->
+            <!--        <option value="自然・科学">自然・科学</option>-->
+            <!--        <option value="映画・映像">映画・映像</option>-->
+            <!--        <option value="現代アート">現代アート</option>-->
+            <!--        <option value="彫刻">彫刻</option>-->
+            <!--        <option value="写真">写真</option>-->
+            <!--</select><br>-->
                 
                 <p class="body__error" style="color:red">{{ $errors->first('museum.body') }}</p>
             </div>

@@ -27,18 +27,11 @@
                 <h2 class='body'>{{ $museum->body }}</h2>
                 <p class='create'>[<a href='/reviews/create/{{ $museum->id }}'>口コミ作成</a>]</p></br>
                 
-                @if($reviews->isEmpty())
                 
-                <a href="/public/{{ $museum->id }}"></a>
-                <!--からの場合の処理-->
-                @else
-                <p class='user_name'>{{ $review->name }}</p>
-                <!--ユーザーネーム表示-->
-                <!--空じゃない場合の処理-->
-                @endif
                 
                 @foreach($reviews as $review)
                     <div class='review'>
+                        <p class='user_name'>{{ $review->user_name }}</p>
                         <!--<p class='title'>タイトル</p>-->
                         <p class='title'>{{ $review->title }}</p>
                         <!--<p class='body'>本文</p>-->
@@ -81,6 +74,7 @@
 	            <p class="edit">[<a href="/public/{{ $museum->id }}/edit">edit</a>]</p>
 	            @endif
 	            
+	            <!--削除-->
                 @if(Auth::user()->id === 1)
                 <form action="/public/{{ $museum->id }}" id="form_{{ $museum->id }}" method="post" style="display:inline">
                 @csrf
@@ -91,6 +85,7 @@
             
             
             <div class="back">[<a href="/public">back</a>]</div>
+            
             <script>
                 function deleteMuseum(e) {
                     'use strict';

@@ -29,10 +29,10 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index(Museum $museum)
+    public function index(Request $request, Museum $museum)
     {
-        $allnumbers = Museum::latest()->first();
-        return view('index')->with(['museums' => $museum ->getPaginateByLimit(), 'allnumbers' => $allnumbers]);
+        // $search = $request->search;
+        return view('index')->with(['museums' => $museum->getPaginateByLimit()]);
     }
     
     public function show(Museum $museum, Review $review)
@@ -41,8 +41,14 @@ class HomeController extends Controller
         $isBookmarked=$museum->users()->where('user_id', Auth::id())->exists();
         
         // ユーザーネーム表示
-        $review = Auth::user()->reviews;
-        $review = Auth::user()->select(['name'])->first();
+        
+        foreach($reviews as $review){
+            $user_id = $review->user_id;
+            $user_name = User::find($user_id)->name;
+            $review->user_name = $user_name;
+        }
+        // $review = Auth::user()->reviews;
+        // $review = Auth::user()->select(['name'])->first();
         // $reviews->user_id = $request->user()->id;
         // $review->user->name = $request->user()->name;
         // dd($reviews);
@@ -53,7 +59,6 @@ class HomeController extends Controller
     
     public function good(User $user, Museum $museum)
     {
-        $museums = $user->museums()->get(); 
         $museums = $user->museums()->paginate(5);
         return view('good')->with(['museums'=>$museums]);
     }
@@ -75,35 +80,29 @@ class HomeController extends Controller
     }
     
     
-    public function search(Request $request)
+    public function search(Request $request, Museum $museum)
     {
-         $twitter = new TwitterOAuth(env('TWITTER_API_KEY'),
-        env('TWITTER_API_SECRET'),
-        env('TWITTER_API_KEY_ACCESS_TOKEN'),
-        env('TWITTER_API_KEY_ACCESS_TOKEN_SECRET'));
-
-        $tweets=$twitter->get('1.1/statuses/user_timeline.json');
-        // dd($tweets);
-
-        // dd($request);
+        // $twitter = new TwitterOAuth(env('TWITTER_API_KEY'),
+        // env('TWITTER_API_SECRET'),
+        // env('TWITTER_API_KEY_ACCESS_TOKEN'),
+        // env('TWITTER_API_KEY_ACCESS_TOKEN_SECRET'));
+        
+        // $tweets=$twitter->get('1.1/statuses/user_timeline.json');
+        
         // 検索
-        // $search = $request->search;
-        // $museums = Museum::scopeSearch($search)->orderBy('created_at', 'desc')->paginate(10);
-         
-        $prefecture = $request->prefecture;
-        $museums = Museum::prefecture($prefecture)->orderBy('created_at', 'desc')->paginate(10);
+        $search = $request->search;
+        if($search){
+            
+            $museums = Museum::Search($search)->orderBy('created_at', 'desc')->paginate(2);
+        }else{
+            $museums=Museum::paginate(3);
+        }
         
-        $museumkind = $request->museumkind;
-        $museums = Museum::museumkind($museumkind)->orderBy('created_at', 'desc')->paginate(10);
-        
-        $museumname = $request->museumname;
-        $museums = Museum::museumname($museumname)->orderBy('created_at', 'desc')->paginate(10);
-        
-        // $museumgenre = $request->museumgenre;
-        // $museums = Museum::museumgenre($museumgenre)->orderBy('created_at', 'desc')->paginate(10);
-         
-        return view('search')->with(['museums'=>$museums, 'prefecture'=>$prefecture, 'museumkind' => $museumkind, 'museumname' => $museumname, 'tweets'=> $tweets]);
+        return view('search')->with(['museums'=>$museums, 'search' => $search]);
     }
+    
+    
+    
     
     public function edit(Museum $museum)
     {
@@ -121,6 +120,7 @@ class HomeController extends Controller
     public function delete(Museum $museum)
     {
         $museum->delete();
+        // Museum::onlyTrashed()->whereNotNull('id')->restore();
         return redirect('/public');
     }
 }
