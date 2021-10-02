@@ -21,6 +21,13 @@ class ReviewController extends Controller
     {
         $reviews = $review ->get();
         $museums = $museum ->get();
+        
+        foreach($reviews as $review){
+            // $reviews=Review::paginate(2);
+        $museum_id = $review->museum_id;
+        $museum_name = optional($museum->find($museum_id))->name;
+        $review->museum_name = $museum_name;
+        }
         // $users=$user->id;
         //userのidを指定、＄usersに格納。useridをreviewsに渡す
         // $reviews=User::find($users)->reviews;
@@ -96,6 +103,6 @@ class ReviewController extends Controller
     public function delete(Review $review)
     {
         $review->delete();
-         return redirect('/');
+         return redirect('/reviews');
     }
 }

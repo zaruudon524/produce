@@ -13,8 +13,8 @@ class Museum extends Model
     
     protected $fillable = [
     'name',
-    'place',
-    'body',
+    'place_id',
+    'body_id',
     'address',
     'time',
     'day',
@@ -43,11 +43,6 @@ class Museum extends Model
         return $this->belongsTo('App\Review');
     }
     
-    // public function tags()
-    // {
-    //     return $this->belongsToMany('App\Tag', museum_tags);
-    // }
-    
     public static function Search($search)
     {
         return self::where('name', 'like', '%' . $search . '%')
@@ -55,21 +50,35 @@ class Museum extends Model
             ->orwhere('body',  'like', '%' . $search . '%');
     }
     
+    public static function Place($place)
+    {
+        return self::where('place', 'like', $place);
+    }
     
-    // public static function prefecture($prefecture)
-    // {
-    //     return self::where('place', 'like', '%' . $prefecture . '%');
-    // }
+    public static function Body($body)
+    {
+        return self::where('body', 'like', $body);
+    }
     
-    // public static function museumkind($museumkind)
-    // {
-    //     return self::where('body', 'like', '%' . $museumkind . '%');
-    // }
+    public function getPlaceNameAttribute()
+      {
+          return config('place.'.$this->place_id);
+      }
+
+      public function getBodyNameAttribute()
+      {
+          return config('body.'.$this->body_id);
+      }
     
-    // public static function museumname($museumname)
-    // {
-    //     return self::where('name', 'like', '%' . $museumname . '%');
-    // }
+    
+    public static function boot()
+    {
+        parent::boot();
+
+        static::deleted(function ($museum) {
+            $museum->reviews()->delete();
+        });
+    }
      
      public function reviews()
     {

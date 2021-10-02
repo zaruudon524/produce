@@ -32,9 +32,9 @@
                 @foreach($reviews as $review)
                     <div class='review'>
                         <p class='user_name'>{{ $review->user_name }}</p>
-                        <!--<p class='title'>タイトル</p>-->
-                        <p class='title'>{{ $review->title }}</p>
-                        <!--<p class='body'>本文</p>-->
+                        
+                            <a href="/reviews/{{ $review->id }}/">{{ $review->title }}</a>
+                       
                         <p class='body'>{{ $review->body }}</p>
                     </div>
                 @endforeach

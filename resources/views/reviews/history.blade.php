@@ -14,8 +14,8 @@
    <!--博物館名表示-->
     @foreach($reviews as $review)
         <div class='review'>
-            <a href="/public/{{ $review->museum_id }}">{{ $review->museum_name }}</a>
-            <p class='title'>{{ $review->title }}</p>
+            <a href="/public/{{ $review->museum_id }}">{{ $review->museum_name }}</a><br>
+            <a href="/reviews/{{ $review->id }}/">{{ $review->title }}</a>
             <p class='body'>{{ $review->body }}</p>
         </div>
     
@@ -29,6 +29,15 @@
         @elseif(file_exists(public_path().'/storage/post_img/'. $review->id .'.gif'))
             <img src="/storage/post_img/{{ $review->id }}.gif">
         @endif
+        
+        <!--@if(Auth::user()->id === $review->id )-->
+        <!--    <form action="/reviews/{{ $review->user_id }}/history" id="form_{{ $review->id }}" method="post" style="display:inline">-->
+        <!--        @csrf-->
+        <!--        @method('DELETE')-->
+        <!--        <button type="submit">削除</button><br>-->
+        <!--    </form>-->
+        <!--@endif-->
+        
     @endforeach
     
     {{ $reviews->links() }}

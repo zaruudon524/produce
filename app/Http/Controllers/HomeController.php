@@ -86,19 +86,48 @@ class HomeController extends Controller
         // env('TWITTER_API_SECRET'),
         // env('TWITTER_API_KEY_ACCESS_TOKEN'),
         // env('TWITTER_API_KEY_ACCESS_TOKEN_SECRET'));
-        
         // $tweets=$twitter->get('1.1/statuses/user_timeline.json');
         
         // 検索
-        $search = $request->search;
-        if($search){
-            
-            $museums = Museum::Search($search)->orderBy('created_at', 'desc')->paginate(2);
-        }else{
-            $museums=Museum::paginate(3);
+        // input()で検索時に入力した項目を取得
+        // $search = $request->input('search');
+        $query = Museum::query();
+        $places = config('place');
+        $bodies = config('body');
+        
+        $search1 = $request->input('place');
+        $search2 = $request->input('body');
+        // if($search){
+        //     $museums = Museum::Search($search)->orderBy('created_at', 'desc')->paginate(2);
+        // }else{
+        //     $museums=Museum::paginate(3);
+        // }
+        
+        // $pref = config('select.pref');
+        // if(!empty($pref)){
+        //     $museums = Museum::Pref($pref)->orderBy('created_at', 'desc')->paginate(2);
+        //     // dd($pref);
+        // }else{
+        //     $museums=Museum::paginate(3);
+        // }
+        // $museumkind = config('select.museumkind');
+        
+        // プルダウンメニューで指定なし以外を選択した場合、$query->whereで選択した棋力と一致するカラムを取得します
+        if ($search1!=null) {
+            $query->where('place_id', $search1)->get();
         }
         
-        return view('search')->with(['museums'=>$museums, 'search' => $search]);
+        if ($search2!=null) {
+            $query->where('body_id', $search2)->get();
+        }
+        
+        $museumsearch = $query->paginate(2);
+        
+        $museums=Museum::all();
+        // dd($museumsearch);
+        // $museums=$museum->get;
+        // dd($query);
+        return view('search')->with(['museumsearch'=>$museumsearch, 'places'=>$places, 'bodies'=>$bodies, 'museums'=>$museums]);
     }
     
     

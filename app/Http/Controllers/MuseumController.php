@@ -6,9 +6,9 @@ use App\Museum;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\MuseumRequest;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use App\Tag;
+// use Illuminate\Support\Facades\Auth;
+// use Illuminate\Support\Facades\DB;
+// use App\Tag;
 use Abraham\TwitterOAuth\TwitterOAuth;
 
 
@@ -27,13 +27,28 @@ class MuseumController extends Controller
 
     public function create()
     {
-        return view('museums.create');
+        $places = config('place');
+        $bodies = config('body');
+        return view('museums.create')->with(['places'=>$places, 'bodies'=>$bodies]);
     }
 
-    public function store(Museum $museum, MuseumRequest $request)
+    public function store(Museum $museum, Request $request)
     {
-        $input = $request['museum'];
-        $museum->fill($input)->save();
+        // $input = $request['museum'];
+        $museum->name = $request->input('name');
+        $museum->place_id=$request->place;
+        $museum->body_id=$request->body;
+        $museum->address = $request->input('address');
+        $museum->time = $request->input('time');
+        $museum->day = $request->input('day');
+        $museum->money = $request->input('money');
+        $museum->traffic = $request->input('traffic');
+        $museum->sns = $request->input('sns');
+        $museum->tel = $request->input('tel');
+        $museum->homepage = $request->input('homepage');
+        $museum->other = $request->input('other');
+        $museum->save();
+        // $museum->fill($input)->save();
         
         $twitter = new TwitterOAuth(env('TWITTER_API_KEY'),
         env('TWITTER_API_SECRET'),
@@ -47,9 +62,6 @@ class MuseumController extends Controller
             // ''.$museum->body.'' . PHP_EOL .
             // '#博物館　#'.$museum->place.' #'.$museum->name.' #'.$museum->body.'' . PHP_EOL .
             // 'http:' . $id
-            
-        //  dd($twitter);
-        
         return redirect('/museums/' . $museum->id);
     }
     

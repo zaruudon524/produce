@@ -2,25 +2,34 @@
 
 @section('content')
         <h1>ホーム</h1>
-        
+
         <!--検索-->
-        <div class=search>
-           <form action="/public/search" method="POST">
-               @csrf
-               
-                <input name="search" type="text" placeholder="キーワードを入力" value={{$search}}>
-                <button type="submit">検索</button>
-           </form>
+        
            
+            {{!! Form::open(['method' => 'get', 'url' => '/']) !!}}
+            {{!! Form::token() !!}}
+            <div>
+            {{!! Form::select('place', config('place'), null) !!}}
+            </div>
+            <div>
+            {{!! Form::select('body', config('body'), null) !!}}
+            </div>
+            {{!! Form::submit('検索') !!}}
+            {{!! Form::close() !!}}
+           
+           
+           <!--museumcreate-->
+            @if(Auth::user()->id === 1)
+                <p class='create'>[<a href='/museums/create'>投稿作成</a>]</p>
+            @endif 
             
-            @if(!Empty($search))
-                @if (count($museums) >0) 
-                <p class='number'>全{{ $museums->total() }}件中</p>
-                <!--データ領域にある、条件に一致するアイテムの総数-->
-                {{  ($museums->currentPage() -1) * $museums->perPage() + 1}} - 
-                {{ (($museums->currentPage() -1) * $museums->perPage() + 1) + (count($museums) -1)  }}件のデータが表示されています。</p>
-                <!--現在の頁数*ページごとに表示するアイテム数-->
-                @endif      
+            <!--検索があった時の件数-->
+            @if(!Empty($museumsearch))
+                    
+                
+                <!--検索結果-->
+                
+                
                 
                 @foreach($museums as $museum)
                     <a href="/public/{{ $museum->id }}">{{ $museum->name }}</a></br>
@@ -29,39 +38,28 @@
                     <p class='body'>属性</p>
                     <p class='body'>{{ $museum->body }}</p>
                 @endforeach
-                
-                
-                {{ $museums->appends(request()->input())->links() }}
+    
+                {{ $museumsearch->appends(request()->input())->links() }}
 
-            @else
-                <div class='museum'>
-                    <div class='allnumber'>
-                    @if (count($museums) >0) 
-                    <p class='number'>全{{ $museums->total() }}件中
-                    <!--データ領域にある、条件に一致するアイテムの総数-->
-                    {{  ($museums->currentPage() -1) * $museums->perPage() + 1}} - 
-                    {{ (($museums->currentPage() -1) * $museums->perPage() + 1) + (count($museums) -1)  }}件のデータが表示されています。</p>
-                    <!--現在の頁数*ページごとに表示するアイテム数-->
-                    </div>
-                    @else
-                    <p>データがありません。</p>
-                    @endif      
-                </div>
             
+                
+            @else
+            <!--検索がなかった時の件数-->
+                
                 <!--<div class="show">[<a href="/public">もっと見る</a>]</div><br>-->
-        
-           @foreach($museums as $museum)
-            <div class='museum'>
-                <a href="/public/{{ $museum->id }}">{{ $museum->name }}</a></br>
-                <p class='place'>場所</p>
-                <p class='place'>{{ $museum->place }}</p>
-                <p class='body'>属性</p>
-                <p class='body'>{{ $museum->body }}</p>
-            </div>
-            @endforeach
-        </div>
-            {{ $museums->links() }}
-           <!--<div class="show">[<a href="/public">もっと見る</a>]</div>-->
+        <!--検索がなかった時の一覧-->
+               @foreach($museums as $museum)
+                <div class='museum'>
+                    <a href="/public/{{ $museum->id }}">{{ $museum->name }}</a></br>
+                    <p class='place'>場所</p>
+                    <p class='place'>{{ $museum->place }}</p>
+                    <p class='body'>属性</p>
+                    <p class='body'>{{ $museum->body }}</p>
+                </div>
+                @endforeach
+            
+                {{ $museums->links() }}
+               <!--<div class="show">[<a href="/public">もっと見る</a>]</div>-->
             @endif
         </div>   
         
