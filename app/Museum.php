@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Scope;
+use Illuminate\Support\Facades\DB;
 
 class Museum extends Model
 {
@@ -23,7 +24,7 @@ class Museum extends Model
     'sns',
     'tel',
     'homepage',
-    'other',
+    'other'
 ];
     
     public function getPaginateByLimit(int $limit_count=3)
@@ -38,9 +39,14 @@ class Museum extends Model
         $user = App\User::find(userId);
     }
     
-     public function review()
+    public function prefs()
     {
-        return $this->belongsTo('App\Review');
+        return $this->hasMany('App\Pref','place_id');
+    }
+    
+    public function museumkinds()
+    {
+        return $this->hasMany('App\Museumkind','body_id');
     }
     
     public static function Search($search)
@@ -50,25 +56,39 @@ class Museum extends Model
             ->orwhere('body',  'like', '%' . $search . '%');
     }
     
-    public static function Place($place)
-    {
-        return self::where('place', 'like', $place);
-    }
+    // public static function Place($place)
+    // {
+    //     // $place = DB::table('museums')
+    //     //   ->join('prefs','museums.place_id','=','prefs.place_id')
+    //     //   ->get();
+    //     return self::where('place', 'like', $place);
+    // }
     
-    public static function Body($body)
-    {
-        return self::where('body', 'like', $body);
-    }
+    // public static function Body($body)
+    // {
+    //     return self::where('body', 'like', $body);
+    // }
     
     public function getPlaceNameAttribute()
       {
-          return config('place.'.$this->place_id);
+          return Pref::where('place_id', $this->place)->first();
       }
-
-      public function getBodyNameAttribute()
+    
+    public function getBodyNameAttribute()
       {
-          return config('body.'.$this->body_id);
+          return Museumkind::where('body_id', $this->body)->first();
       }
+    
+    
+    // public function getPlaceNameAttribute()
+    //   {
+    //       return config('place.'.$this->place_id);
+    //   }
+        
+    //  public function getBodyNameAttribute()
+    //   {
+    //       return config('body.'.$this->body_id);
+    //   }
     
     
     public static function boot()

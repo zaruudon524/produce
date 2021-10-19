@@ -14,7 +14,7 @@ class CreateMuseumsTable extends Migration
     public function up()
     {
         Schema::create('museums', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->Increments('id');
             $table->char('name', 100);
             $table->integer('place_id');
             $table->integer('body_id');
@@ -27,7 +27,9 @@ class CreateMuseumsTable extends Migration
             $table->char('tel', 100)->nullable();
             $table->char('homepage', 100)->nullable();
             $table->char('other', 100)->nullable();
-            
+            // $table->foreign('place_id')->references('id')->on('prefs');
+            // $table->foreign('body_id')->references('id')->on('museumkinds');
+
             $table->softDeletes();
             $table->timestamps();
         });

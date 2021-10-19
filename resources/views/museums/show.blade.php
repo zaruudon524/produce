@@ -9,7 +9,7 @@
             
 
             <div class='museums'>
-                <h3 class='tag'>{{ $museum->tag }}</h3>
+                
                 <h2 class='name'>{{ $museum->name }}</h2>
                 <h2 class='place'>{{ $museum->place }}</h2>
                 

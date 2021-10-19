@@ -6,16 +6,31 @@
         <!--検索-->
         
            
-            {{!! Form::open(['method' => 'get', 'url' => '/']) !!}}
-            {{!! Form::token() !!}}
+            
+            <form action="/" method="GET">
+                @csrf
+            <select id="place" name="museum[place]" value="{{ old('museum.place') }}">
+                    @foreach($places as $place)
+                        <option value=""hidden>都道府県</option>
+                        <option value={{ $place->place_id }}>{{$place->name}}</option>
+                    @endforeach
+            </select><br>
+            
+            <select id="body" name="museum[body]" value="{{ old('museum.body') }}">
+                    @foreach($bodies as $body)
+                        <option value=""hidden>館種</option>
+                        <option value={{ $body->body_id }}>{{$body->index}}</option>
+                    @endforeach
+            </select><br>
+            
+            <input type="submit" value="検索"/>
+            
+            </form>
+            
             <div>
-            {{!! Form::select('place', config('place'), null) !!}}
+            
             </div>
-            <div>
-            {{!! Form::select('body', config('body'), null) !!}}
-            </div>
-            {{!! Form::submit('検索') !!}}
-            {{!! Form::close() !!}}
+            
            
            
            <!--museumcreate-->
@@ -34,9 +49,9 @@
                 @foreach($museums as $museum)
                     <a href="/public/{{ $museum->id }}">{{ $museum->name }}</a></br>
                     <p class='place'>場所</p>
-                    <p class='place'>{{ $museum->place }}</p>
+                    <p class='place'>{{ $museum->placeName }}</p>
                     <p class='body'>属性</p>
-                    <p class='body'>{{ $museum->body }}</p>
+                    <p class='body'>{{ $museum->bodyName }}</p>
                 @endforeach
     
                 {{ $museumsearch->appends(request()->input())->links() }}

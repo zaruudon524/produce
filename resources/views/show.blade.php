@@ -2,6 +2,7 @@
 
 @section('content')
         <h1>博物館</h1>
+        <!--ブックマーク-->
             @if($isBookmarked)
              <div>
                 <form action="/public/{{ $museum->id }}/deletebookmark" method="POST">
@@ -23,8 +24,11 @@
             
             <div class='museums'>
                 <h2 class='name'>{{ $museum->name }}</h2>
-                <h2 class='place'>{{ $museum->place }}</h2>
-                <h2 class='body'>{{ $museum->body }}</h2>
+                @foreach($museums as $museum)
+                <option value={{ $museum->place_id }}>{{$museum->placeName}}</option>
+                <h2 class='place'>{{ $museum->placeName }}</h2>
+                @endforeach
+                <h2 class='body'>{{ $museum->BodyName }}</h2>
                 <p class='create'>[<a href='/reviews/create/{{ $museum->id }}'>口コミ作成</a>]</p></br>
                 
                 

@@ -9,6 +9,9 @@ use App\Http\Requests\MuseumRequest;
 use App\Museum;
 use App\Review;
 use App\User;
+use App\Pref;
+use App\Museumkind;
+use Illuminate\Support\Facades\DB;
 use Abraham\TwitterOAuth\TwitterOAuth;
 use Illuminate\Support\Facades\Auth;
 
@@ -47,12 +50,16 @@ class HomeController extends Controller
             $user_name = User::find($user_id)->name;
             $review->user_name = $user_name;
         }
-        // $review = Auth::user()->reviews;
-        // $review = Auth::user()->select(['name'])->first();
-        // $reviews->user_id = $request->user()->id;
-        // $review->user->name = $request->user()->name;
-        // dd($reviews);
-        return view('show')->with(['museum' => $museum, 'reviews' => $reviews, 'review'=>$review, 'isBookmarked' =>$isBookmarked]);
+        
+        $museums=Museum::all();
+        
+        // $places = Pref::all();
+        // $museum1 = Museum::where('place_id',$places)->first();
+        // $museum=Museum::with('prefs')->get();
+        // dd($museum->toArray());
+        // var_dump($museums);
+        
+        return view('show')->with(['museum' => $museum, 'museums'=>$museums, 'reviews' => $reviews, 'review'=>$review, 'isBookmarked' =>$isBookmarked]);
     }
     
     
@@ -80,20 +87,23 @@ class HomeController extends Controller
     }
     
     
-    public function search(Request $request, Museum $museum)
+    public function search(Request $request, Museum $museum, Pref $pref, Museumkind $museumkind)
     {
         // $twitter = new TwitterOAuth(env('TWITTER_API_KEY'),
         // env('TWITTER_API_SECRET'),
         // env('TWITTER_API_KEY_ACCESS_TOKEN'),
         // env('TWITTER_API_KEY_ACCESS_TOKEN_SECRET'));
         // $tweets=$twitter->get('1.1/statuses/user_timeline.json');
-        
+        // dd($request);
         // 検索
         // input()で検索時に入力した項目を取得
         // $search = $request->input('search');
         $query = Museum::query();
-        $places = config('place');
-        $bodies = config('body');
+        $places = Pref::all();
+        // $museum = Museum::where('place_id',$places)->get();
+        
+        $bodies = Museumkind::all();
+        // $museum = Museum::where('body_id',$bodies)->get();
         
         $search1 = $request->input('place');
         $search2 = $request->input('body');

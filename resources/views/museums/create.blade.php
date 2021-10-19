@@ -15,25 +15,25 @@
            <div class="place">
                 <h3>場所</h3>
                 <!--<input type="text" name="museum[place]" placeholder="場所" value=""/>-->
-                <select id="place" name="museum[place]" value="{{ old('museum.place') }}">
-                    @foreach($places as $index => $name)
+                <select id="place" name="museum[place_id]" value="{{ old('museum.place_id') }}">
+                    @foreach($places as $place)
                         <option value=""hidden>都道府県</option>
-                        <option value={{ $index }}>{{$index}}{{$name}}</option>
+                        <option value={{ $place->place_id }}>{{$place->name}}</option>
                     @endforeach
                     
                 </select><br>
-                <p class="place__error" style="color:red">{{ $errors->first('museum.place') }}</p>
+                <p class="place__error" style="color:red">{{ $errors->first('museum.place_id') }}</p>
             </div>
             <div class="body">
                 <h3>属性</h3>
                 <!--<input type="text" name="museum[body]" placeholder="属性" value=" }}"/>-->
-                <select id="body" name="museum[body]" value="{{ old('museum.body') }}">
-                    @foreach($bodies as $index => $name)
+                <select id="body" name="museum[body_id]" value="{{ old('museum.body_id') }}">
+                    @foreach($bodies as $body)
                         <option value=""hidden>館種</option>
-                        <option value={{ $index }}>{{$index}}{{$name}}</option>
+                        <option value={{ $body->body_id }}>{{$body->index}}</option>
                     @endforeach
                 </select><br>
-                <p class="place__error" style="color:red">{{ $errors->first('museum.body') }}</p>
+                <p class="place__error" style="color:red">{{ $errors->first('museum.body_id') }}</p>
                 </div>
                 
                 <p class="body__error" style="color:red">{{ $errors->first('museum.body') }}</p>

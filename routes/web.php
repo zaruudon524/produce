@@ -11,7 +11,6 @@
 |
 */
 
-// Route::get('/', 'HomeController@search')->middleware('auth');
 Route::get('/reviews', 'ReviewController@index');
 Route::get('/reviews/{user}/history', 'ReviewController@history')->name('history');
 Route::get('/reviews/create/{museum}', 'ReviewController@create')->middleware('auth');
@@ -21,7 +20,7 @@ Route::delete('/reviews/{review}', 'ReviewController@delete')->middleware('auth'
 Route::get('/reviews/{review}/', 'ReviewController@show')->middleware('auth');
 Route::post('/reviews/{museum}', 'ReviewController@store')->middleware('auth');
 
-Route::get('/museums', 'MuseumController@index')->middleware('auth');
+// Route::get('/museums', 'MuseumController@index')->middleware('auth');
 Route::get('/museums/create', 'MuseumController@create');
 Route::get('/museums/{museum}/edit', 'MuseumController@edit');
 Route::put('/museums/{museum}/', 'MuseumController@update');
@@ -34,7 +33,7 @@ Route::resource('/user', 'UserController@index')->middleware('auth');
 Auth::routes();
 
 Route::get('/', 'HomeController@search')->middleware('auth');//検索と一覧とトップページ
-Route::get('/public', 'HomeController@index');
+// Route::get('/public', 'HomeController@index');
 Route::delete('/public/{museum}', 'HomeController@delete');
 Route::post('/public/{museum}/deletebookmark', 'HomeController@deletebookmark');
 Route::get('/public/{museum}/', 'HomeController@show')->middleware('auth');
