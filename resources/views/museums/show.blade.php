@@ -11,9 +11,9 @@
             <div class='museums'>
                 
                 <h2 class='name'>{{ $museum->name }}</h2>
-                <h2 class='place'>{{ $museum->place }}</h2>
+                <h2 class='place'>{{ $museum->placeName }}</h2>
                 
-                <h2 class='body'>{{ $museum->body }}</h2>
+                <h2 class='body'>{{ $museum->bodyName }}</h2>
                 <h2 class='address'>{{ $museum->address }}</h2>
                 <p class='time'>{{ $museum->time }}</p>
                 <p class='day'>{{ $museum->day }}</p>
@@ -25,6 +25,7 @@
                 <p class='other'>{{ $museum->other }}</p>
                 <p class='updated_at'>{{ $museum->updated_at }}</p>
             </div>
+            
              @if(Auth::user()->id === 1)
             <form action="/museums/{{ $museum->id }}" id="form_{{ $museum->id }}" method="post" style="display:inline">
             @csrf
@@ -32,7 +33,7 @@
                 <button type="submit">削除</button> 
             </form>
             @endif
-            <div class="back">[<a href="/public">back</a>]</div>
+            <div class="back">[<a href="/">back</a>]</div>
             <script>
                 function deleteMuseum(e) {
                     'use strict';

@@ -14,8 +14,8 @@ class Museum extends Model
     
     protected $fillable = [
     'name',
-    'place_id',
-    'body_id',
+    'place',
+    'body',
     'address',
     'time',
     'day',
@@ -24,7 +24,9 @@ class Museum extends Model
     'sns',
     'tel',
     'homepage',
-    'other'
+    'other',
+    'place_id',
+    'body_id'
 ];
     
     public function getPaginateByLimit(int $limit_count=3)
@@ -39,14 +41,15 @@ class Museum extends Model
         $user = App\User::find(userId);
     }
     
-    public function prefs()
+    public function pref()
     {
-        return $this->hasMany('App\Pref','place_id');
+        // $places = App\Museum::find(place_id)->prefs();
+        return $this->belongsTo('App\Pref','place_id');
     }
     
-    public function museumkinds()
+    public function museumkind()
     {
-        return $this->hasMany('App\Museumkind','body_id');
+        return $this->belongsTo('App\Museumkind','body_id');
     }
     
     public static function Search($search)
@@ -56,11 +59,9 @@ class Museum extends Model
             ->orwhere('body',  'like', '%' . $search . '%');
     }
     
+   
     // public static function Place($place)
     // {
-    //     // $place = DB::table('museums')
-    //     //   ->join('prefs','museums.place_id','=','prefs.place_id')
-    //     //   ->get();
     //     return self::where('place', 'like', $place);
     // }
     
@@ -71,24 +72,14 @@ class Museum extends Model
     
     public function getPlaceNameAttribute()
       {
-          return Pref::where('place_id', $this->place)->first();
+          return Pref::where('place_id', $this->place)->first()->name;
       }
     
     public function getBodyNameAttribute()
       {
-          return Museumkind::where('body_id', $this->body)->first();
+          return Museumkind::where('body_id', $this->body)->first()->index;
       }
     
-    
-    // public function getPlaceNameAttribute()
-    //   {
-    //       return config('place.'.$this->place_id);
-    //   }
-        
-    //  public function getBodyNameAttribute()
-    //   {
-    //       return config('body.'.$this->body_id);
-    //   }
     
     
     public static function boot()

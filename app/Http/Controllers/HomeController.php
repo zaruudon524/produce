@@ -51,8 +51,8 @@ class HomeController extends Controller
             $review->user_name = $user_name;
         }
         
-        $museums=Museum::all();
-        
+        $museums=$museum->paginate(2);
+        // dd($museums);
         // $places = Pref::all();
         // $museum1 = Museum::where('place_id',$places)->first();
         // $museum=Museum::with('prefs')->get();
@@ -67,6 +67,7 @@ class HomeController extends Controller
     public function good(User $user, Museum $museum)
     {
         $museums = $user->museums()->paginate(5);
+        // dd($museums);
         return view('good')->with(['museums'=>$museums]);
     }
 
@@ -98,21 +99,22 @@ class HomeController extends Controller
         // 検索
         // input()で検索時に入力した項目を取得
         // $search = $request->input('search');
-        $query = Museum::query();
+        
+        // $places = Pref::with('museums')->get();
+        // $bodies = Museumkind::with('museums')->get();
         $places = Pref::all();
-        // $museum = Museum::where('place_id',$places)->get();
-        
         $bodies = Museumkind::all();
-        // $museum = Museum::where('body_id',$bodies)->get();
         
-        $search1 = $request->input('place');
-        $search2 = $request->input('body');
+        $placeId = $request->input('placeId');
+        $bodyId = $request->input('bodyId');
+        $query = Museum::query();
+        // dd($query);
         // if($search){
         //     $museums = Museum::Search($search)->orderBy('created_at', 'desc')->paginate(2);
         // }else{
         //     $museums=Museum::paginate(3);
         // }
-        
+        // dd($request);
         // $pref = config('select.pref');
         // if(!empty($pref)){
         //     $museums = Museum::Pref($pref)->orderBy('created_at', 'desc')->paginate(2);
@@ -123,21 +125,26 @@ class HomeController extends Controller
         // $museumkind = config('select.museumkind');
         
         // プルダウンメニューで指定なし以外を選択した場合、$query->whereで選択した棋力と一致するカラムを取得します
-        if ($search1!=null) {
-            $query->where('place_id', $search1)->get();
+        if (isset($placeId)) {
+            $query->where('place_id', $placeId)->get();
         }
         
-        if ($search2!=null) {
-            $query->where('body_id', $search2)->get();
+        if (isset($bodyId)) {
+            $query->where('body_id', $bodyId)->get();
         }
         
-        $museumsearch = $query->paginate(2);
+        $museumsearches = $query->paginate(2);
+        // dd($museumsearches);
+        // dump($museumsearches);
         
-        $museums=Museum::all();
-        // dd($museumsearch);
+        $museums=$museum->paginate(2);
+        // $museums = Pref::find('place_id')->museums;
+        // $museums = Museumkind::find('body_id')->museums;
+
+        // dd($museums);
         // $museums=$museum->get;
         // dd($query);
-        return view('search')->with(['museumsearch'=>$museumsearch, 'places'=>$places, 'bodies'=>$bodies, 'museums'=>$museums]);
+        return view('search')->with(['museumsearches'=>$museumsearches, 'places'=>$places, 'bodies'=>$bodies, 'museums'=>$museums]);
     }
     
     

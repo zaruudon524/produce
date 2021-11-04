@@ -7,8 +7,8 @@ use App\User;
 use App\Pref;
 use App\Museumkind;
 use Illuminate\Http\Request;
-use App\Http\Requests\MuseumRequest;
-// use Illuminate\Support\Facades\Auth;
+// use App\Http\Requests\Request;
+use Illuminate\Support\Facades\Auth;
 // use Illuminate\Support\Facades\DB;
 // use App\Tag;
 use Abraham\TwitterOAuth\TwitterOAuth;
@@ -23,30 +23,35 @@ class MuseumController extends Controller
 
     public function show(Museum $museum)
     {
-        $isBookmarked=$museum->users()->where('user_id', Auth::id())->exists();
-        return view('museums.show')->with(['museum' => $museum, 'isBookmarked' =>$isBookmarked]);
+        // $isBookmarked=$museum->users()->where('user_id', Auth::id())->exists();
+        $places=Pref::all();
+        $bodies = Museumkind::all();
+        // $museum=Pref::all()->museums;
+        // dd($museum);
+        return view('museums.show')->with(['museum' => $museum, 'places'=>$places, 'bodies'=>$bodies]);
     }
 
-    public function create()
+    public function create(Museum $museum)
     {
         $places=Pref::all();
         
-        // foreach($reviews as $review){
-        //     $user_id = $review->user_id;
-        //     $user_name = User::find($user_id)->name;
-        //     $review->user_name = $user_name;
-        // }
-        // $places = Museum::with('place_id');
+        // $museums = Pref::find(place_id);
         // $places = Museum::where('pref');
         $bodies = Museumkind::all();
         // dd($places);
-        return view('museums.create')->with(['places'=>$places, 'bodies'=>$bodies]);
+        $museums = Museum::all();
+        foreach($museums as $museum){
+            $place_id = $museum->place_id;
+            $place_name = optional($places->find($place_id))->name;
+            $museum->place_name = $place_name;
+        }
+        // dd($place_name);
+        return view('museums.create')->with(['places'=>$places, 'bodies'=>$bodies, 'museums'=>$museums]);
     }
 
     public function store(Museum $museum, Request $request)
     {
         $input = $request['museum'];
-        
         
         // $museum->name = $request->input('museum[name]');
         // $museum->place_id=$request->museum[place];
@@ -62,7 +67,7 @@ class MuseumController extends Controller
         // $museum->other = $request->input('museum[other]');
         // $museum->save();
         $museum->fill($input)->save();
-        dd($request);
+        // dd($request);
         
         
         // $twitter = new TwitterOAuth(env('TWITTER_API_KEY'),

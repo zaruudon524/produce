@@ -16,8 +16,8 @@ class CreateMuseumsTable extends Migration
         Schema::create('museums', function (Blueprint $table) {
             $table->Increments('id');
             $table->char('name', 100);
-            $table->integer('place_id');
-            $table->integer('body_id');
+            $table->char('place', 100);
+            $table->char('body', 100);
             $table->text('address');
             $table->char('time', 100)->nullable();
             $table->char('day', 100)->nullable();
@@ -27,6 +27,8 @@ class CreateMuseumsTable extends Migration
             $table->char('tel', 100)->nullable();
             $table->char('homepage', 100)->nullable();
             $table->char('other', 100)->nullable();
+            $table->integer('place_id')->nullable();
+            $table->integer('body_id')->nullable();
             // $table->foreign('place_id')->references('id')->on('prefs');
             // $table->foreign('body_id')->references('id')->on('museumkinds');
 

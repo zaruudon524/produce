@@ -14,8 +14,8 @@ class CreatePrefsTable extends Migration
     public function up()
     {
         Schema::create('prefs', function (Blueprint $table) {
-            // $table->Increments('id');
-            $table->Increments('place_id'); 
+            $table->Increments('id');
+            $table->integer('place_id'); 
             $table->text('name'); 
             
             $table->timestamps();

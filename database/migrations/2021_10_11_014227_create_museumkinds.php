@@ -14,8 +14,8 @@ class CreateMuseumkinds extends Migration
     public function up()
     {
         Schema::create('museumkinds', function (Blueprint $table) {
-            // $table->Increments('id');
-            $table->Increments('body_id');
+            $table->Increments('id');
+            $table->integer('body_id');
             $table->text('index');
             $table->timestamps();
         });

@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Museumkind extends Model
 {
-    public function museum()
+    public function museums()
     {
-        return $this->belongsTo(Museum::class, 'body_id');
+        return $this->hasMany('App\Museum', 'body_id');
     }
     
-    protected $primaryKey = 'body_id';
-    public $incrementing = false;
+    // protected $primaryKey = 'body_id';
+    // public $incrementing = false;
 }

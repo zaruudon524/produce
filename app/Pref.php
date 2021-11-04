@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pref extends Model
 {
-    public function museum()
+    public function museums()
     {
-        return $this->belongsTo(Museum::class, 'place_id');
+        return $this->hasMany('App\Museum', 'place_id');
     }
     
-    protected $primaryKey = 'place_id';
-    public $incrementing = false;
+    // protected $primaryKey = 'place_id';
+    // public $incrementing = false;
 }

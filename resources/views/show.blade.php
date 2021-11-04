@@ -24,11 +24,8 @@
             
             <div class='museums'>
                 <h2 class='name'>{{ $museum->name }}</h2>
-                @foreach($museums as $museum)
-                <option value={{ $museum->place_id }}>{{$museum->placeName}}</option>
                 <h2 class='place'>{{ $museum->placeName }}</h2>
-                @endforeach
-                <h2 class='body'>{{ $museum->BodyName }}</h2>
+                <h2 class='body'>{{ $museum->bodyName }}</h2>
                 <p class='create'>[<a href='/reviews/create/{{ $museum->id }}'>口コミ作成</a>]</p></br>
                 
                 
@@ -88,7 +85,7 @@
                 @endif
             
             
-            <div class="back">[<a href="/public">back</a>]</div>
+            <div class="back">[<a href="/">back</a>]</div>
             
             <script>
                 function deleteMuseum(e) {
