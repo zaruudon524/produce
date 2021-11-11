@@ -37,13 +37,22 @@ class Museum extends Model
     
     public function users()
     {
+        // $user = User::find(userId);
         return $this->belongsToMany('App\User')->withTimestamps();
-        $user = App\User::find(userId);
+    }
+    
+    public function reviews()
+    {
+        return $this->hasMany('App\Review');
+    }
+    
+    public function surveys()
+    {
+        return $this->hasMany('App\Survey');
     }
     
     public function pref()
     {
-        // $places = App\Museum::find(place_id)->prefs();
         return $this->belongsTo('App\Pref','place_id');
     }
     
@@ -52,22 +61,11 @@ class Museum extends Model
         return $this->belongsTo('App\Museumkind','body_id');
     }
     
-    public static function Search($search)
-    {
-        return self::where('name', 'like', '%' . $search . '%')
-            ->orwhere('place',  'like', '%' . $search . '%')
-            ->orwhere('body',  'like', '%' . $search . '%');
-    }
-    
-   
-    // public static function Place($place)
+    // public static function Search($search)
     // {
-    //     return self::where('place', 'like', $place);
-    // }
-    
-    // public static function Body($body)
-    // {
-    //     return self::where('body', 'like', $body);
+    //     return self::where('name', 'like', '%' . $search . '%')
+    //         ->orwhere('place',  'like', '%' . $search . '%')
+    //         ->orwhere('body',  'like', '%' . $search . '%');
     // }
     
     public function getPlaceNameAttribute()
@@ -90,12 +88,6 @@ class Museum extends Model
             $museum->reviews()->delete();
         });
     }
-     
-     public function reviews()
-    {
-        return $this->hasMany('App\Review');
-    }
-  
 }
 
     

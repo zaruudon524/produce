@@ -92,7 +92,7 @@ class ReviewController extends Controller
         return view('reviews.edit')->with(['review' => $review]);
     }
     
-    public function update(Request $request, Review $review)
+    public function update(ReviewRequest $request, Review $review)
     {
         $input_review = $request['review'];
         $review->fill($input_review)->save();

@@ -18,10 +18,10 @@ class Review extends Model
 ];
 
 
-public function museums()
+public function museum()
   {
     $museums = App\Review::find(museum_id)->museums();
-    return $this->hasMany('App\Museum');
+    return $this->belongsTo('App\Museum');
   }
   
   public function users()

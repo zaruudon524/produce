@@ -18,9 +18,9 @@
             <div class='museum'>
                 <a href="/public/{{ $museum->id }}">{{ $museum->name }}</a></br>
                 <p class='place'>場所</p>
-                <p class='place'>{{ $museum->place }}</p>
+                <p class='place'>{{ $museum->placeName }}</p>
                 <p class='body'>属性</p>
-                <p class='body'>{{ $museum->body }}</p>
+                <p class='body'>{{ $museum->bodyName }}</p>
             </div>
         @endforeach
                <div class="back">[<a href="/">back</a>]</div>

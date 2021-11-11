@@ -52,23 +52,7 @@ class MuseumController extends Controller
     public function store(Museum $museum, Request $request)
     {
         $input = $request['museum'];
-        
-        // $museum->name = $request->input('museum[name]');
-        // $museum->place_id=$request->museum[place];
-        // $museum->body_id=$request->museum[body];
-        // $museum->address = $request->input('museum[address]');
-        // $museum->time = $request->input('museum[time]');
-        // $museum->day = $request->input('museum[day]');
-        // $museum->money = $request->input('museum[money]');
-        // $museum->traffic = $request->input('museum[traffic]');
-        // $museum->sns = $request->input('museum[sns]');
-        // $museum->tel = $request->input('museum[tel]');
-        // $museum->homepage = $request->input('museum[homepage]');
-        // $museum->other = $request->input('museum[other]');
-        // $museum->save();
         $museum->fill($input)->save();
-        // dd($request);
-        
         
         // $twitter = new TwitterOAuth(env('TWITTER_API_KEY'),
         // env('TWITTER_API_SECRET'),

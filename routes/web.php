@@ -42,13 +42,10 @@ Route::get('/public/{user}/good', 'HomeController@good')->name('good');
 Route::get('/public/{museum}/edit', 'HomeController@edit');
 Route::put('/public/{museum}/', 'HomeController@update');
 
-Route::get('/question', 'QuestionController@form');
-Route::get('/question/confirm', 'QuestionController@confirm');
-Route::post('/question/complete', 'QuestionController@complete');
-
-// Route::get('/question/{museum}', 'QuestionController@form');
-// Route::post('/question/{museum}/confirm', 'QuestionController@confirm');
-// Route::post('/question/{museum}/complete', 'QuestionController@complete');
+Route::get('/survey/{museum}', 'SurveyController@form');
+Route::post('/survey/{museum}/confirm', 'SurveyController@confirm');
+// Route::post('/survey/{museum}', 'SurveyController@store');
+Route::post('/survey/{museum}/complete', 'SurveyController@complete');
 
 
 // Route::get('/mail', 'ContactController@index')->name('contact');

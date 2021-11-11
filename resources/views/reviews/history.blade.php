@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>投稿履歴</h1>
+    <h1>投稿履歴</h1></br>
+   
+   @if(empty($reviews))
+        <h3 class="text-center">口コミを投稿してみよう！</h3>
+   @endif
    
    @if (count($reviews) >0) 
         <p class='number'>全{{ $reviews->total() }}件中

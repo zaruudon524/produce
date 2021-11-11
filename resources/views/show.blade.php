@@ -26,6 +26,7 @@
                 <h2 class='name'>{{ $museum->name }}</h2>
                 <h2 class='place'>{{ $museum->placeName }}</h2>
                 <h2 class='body'>{{ $museum->bodyName }}</h2>
+                <p class='question'>[<a href='/survey/{{ $museum->id }}'>アンケート回答</a>]</p></br>
                 <p class='create'>[<a href='/reviews/create/{{ $museum->id }}'>口コミ作成</a>]</p></br>
                 
                 

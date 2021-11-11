@@ -2,7 +2,7 @@
 
 @section('content')
 
-        <h1>お問い合わせありがとうございました。</h1>
+        <h1 class="text-center">回答ありがとうございました。</h1>
         <div class="back">[<a href="/">トップページへ戻る</a>]</div>
     </body>
 @include("layouts.footer" )

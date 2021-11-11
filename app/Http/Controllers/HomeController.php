@@ -99,56 +99,36 @@ class HomeController extends Controller
         // 検索
         // input()で検索時に入力した項目を取得
         // $search = $request->input('search');
-        
-        // $places = Pref::with('museums')->get();
-        // $bodies = Museumkind::with('museums')->get();
         $places = Pref::all();
         $bodies = Museumkind::all();
         
+        $searchWord = $request->input('searchWord');
         $placeId = $request->input('placeId');
         $bodyId = $request->input('bodyId');
         $query = Museum::query();
-        // dd($query);
         // if($search){
         //     $museums = Museum::Search($search)->orderBy('created_at', 'desc')->paginate(2);
         // }else{
         //     $museums=Museum::paginate(3);
         // }
-        // dd($request);
-        // $pref = config('select.pref');
-        // if(!empty($pref)){
-        //     $museums = Museum::Pref($pref)->orderBy('created_at', 'desc')->paginate(2);
-        //     // dd($pref);
-        // }else{
-        //     $museums=Museum::paginate(3);
-        // }
-        // $museumkind = config('select.museumkind');
+        if (isset($searchWord)) {
+            $query->where('name',  'like', '%' . $searchWord . '%');
+        }
         
-        // プルダウンメニューで指定なし以外を選択した場合、$query->whereで選択した棋力と一致するカラムを取得します
         if (isset($placeId)) {
-            $query->where('place_id', $placeId)->get();
+            $query->where('place', $placeId);
         }
         
         if (isset($bodyId)) {
-            $query->where('body_id', $bodyId)->get();
+            $query->where('body', $bodyId);
         }
-        
-        $museumsearches = $query->paginate(2);
         // dd($museumsearches);
-        // dump($museumsearches);
+        $museumsearches= $query->paginate(2);
         
         $museums=$museum->paginate(2);
-        // $museums = Pref::find('place_id')->museums;
-        // $museums = Museumkind::find('body_id')->museums;
 
-        // dd($museums);
-        // $museums=$museum->get;
-        // dd($query);
-        return view('search')->with(['museumsearches'=>$museumsearches, 'places'=>$places, 'bodies'=>$bodies, 'museums'=>$museums]);
+        return view('search')->with(['museumsearches'=>$museumsearches, 'places'=>$places, 'bodies'=>$bodies, 'museums'=>$museums, 'searchWord'=>$searchWord]);
     }
-    
-    
-    
     
     public function edit(Museum $museum)
     {

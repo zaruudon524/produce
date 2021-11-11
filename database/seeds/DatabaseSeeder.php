@@ -15,5 +15,6 @@ class DatabaseSeeder extends Seeder
         $this->call(PrefsTableSeeder::class);
         $this->call(MuseumsTableSeeder::class);
         $this->call(MuseumkindsTableSeeder::class);
+        // $this->call(SurveysTableSeeder::class);
     }
 }

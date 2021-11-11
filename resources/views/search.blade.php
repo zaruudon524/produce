@@ -1,29 +1,31 @@
 @extends('layouts.app')
 
 @section('content')
-        <h1>ホーム</h1>
+        <!--<h1>ホーム</h1>-->
 
         <!--検索-->
         
             <form action="/" method="GET">
                 @csrf
-                <select id="place" name="placeId" >
-                        
+                <h2>博物館を探す</h2>
+                <input type="text" name="searchWord" value="{{ $searchWord }}" placeholder="博物館名" class="form-group"></br>
+                
+                <div style="display:inline-flex">
+                <select id="place" name="placeId" class="form-group">
                         @foreach($places as $place)
                             <option value=""hidden>都道府県</option>
                             <option value={{ $place->place_id }}>{{$place->name}}</option>
                         @endforeach
-                        <!--valueでurlに検索内容を入れる-->
                 </select><br>
                 
-                <select id="body" name="bodyId" >
+                <select id="body" name="bodyId" class="form-group">
                         @foreach($bodies as $body)
                             <option value=""hidden>館種</option>
                             <option value={{ $body->body_id }}>{{$body->index}}</option>
                         @endforeach
                 </select><br>
-                
-                <input type="submit" value="検索"/>
+                </div>
+                <input type="submit" class='btn btn-primary', value="検索"/>
             </form>
             
            <!--管理者作成の博物館データ-->
@@ -45,13 +47,13 @@
                     <p>データがありません。</p>
                 @endif      
                 
-                @foreach($museumsearches as $museum)
+                @foreach($museumsearches as $museumsearch)
                 <div class='museum'>
-                    <a href="/public/{{ $museum->id }}">{{ $museum->name }}</a></br>
+                    <a href="/public/{{ $museumsearch->id }}">{{ $museumsearch->name }}</a></br>
                     <p class='place'>場所</p>
-                    <p class='place'>{{ $museum->placeName }}</p>
+                    <p class='place'>{{ $museumsearch->placeName }}</p>
                     <p class='body'>属性</p>
-                    <p class='body'>{{ $museum->bodyName }}</p>
+                    <p class='body'>{{ $museumsearch->bodyName }}</p>
                 </div>
                 @endforeach
     
