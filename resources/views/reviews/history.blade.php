@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<section class="bg-light p-3">
     <h1>投稿履歴</h1></br>
    
    @if(empty($reviews))
@@ -32,23 +33,15 @@
             <img src="/storage/post_img/{{ $review->id }}.png">
         @elseif(file_exists(public_path().'/storage/post_img/'. $review->id .'.gif'))
             <img src="/storage/post_img/{{ $review->id }}.gif">
-        @endif
-        
-        <!--@if(Auth::user()->id === $review->id )-->
-        <!--    <form action="/reviews/{{ $review->user_id }}/history" id="form_{{ $review->id }}" method="post" style="display:inline">-->
-        <!--        @csrf-->
-        <!--        @method('DELETE')-->
-        <!--        <button type="submit">削除</button><br>-->
-        <!--    </form>-->
-        <!--@endif-->
+        @endif</br>
         
     @endforeach
     
     {{ $reviews->links() }}
     
-    
-    <div class="back">[<a href="/">back</a>]</div>
-    
+        
+    <button type="button" class="btn btn-info" onClick="history.back()">戻る</button>
+</section>
     
 @include("layouts.footer" )
 @endsection

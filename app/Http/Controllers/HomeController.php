@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\ContactController;
 use Illuminate\Http\Request;
-use App\Http\Requests\ReviewRequest;
 use App\Http\Requests\MuseumRequest;
 use App\Museum;
 use App\Review;
@@ -32,11 +31,6 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index(Request $request, Museum $museum)
-    {
-        // $search = $request->search;
-        return view('index')->with(['museums' => $museum->getPaginateByLimit()]);
-    }
     
     public function show(Museum $museum, Review $review)
     {
@@ -44,7 +38,6 @@ class HomeController extends Controller
         $isBookmarked=$museum->users()->where('user_id', Auth::id())->exists();
         
         // ユーザーネーム表示
-        
         foreach($reviews as $review){
             $user_id = $review->user_id;
             $user_name = User::find($user_id)->name;
@@ -88,7 +81,7 @@ class HomeController extends Controller
     }
     
     
-    public function search(Request $request, Museum $museum, Pref $pref, Museumkind $museumkind)
+    public function search(Request $request, Museum $museum)
     {
         // $twitter = new TwitterOAuth(env('TWITTER_API_KEY'),
         // env('TWITTER_API_SECRET'),
@@ -146,7 +139,6 @@ class HomeController extends Controller
     public function delete(Museum $museum)
     {
         $museum->delete();
-        // Museum::onlyTrashed()->whereNotNull('id')->restore();
         return redirect('/public');
     }
 }

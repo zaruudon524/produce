@@ -1,18 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
+    <section class="bg-light p-3">
         <h1>博物館</h1>
         @if(Auth::user()->id === 1)
-            <p class="edit">[<a href="/museums/{{ $museum->id }}/edit">edit</a>]</p>
+            <a href="/museums/{{ $museum->id }}/edit"  class="btn btn-info">編集</a>
             <input type="submit" style="display:none">
         @endif
             
 
             <div class='museums'>
-                
                 <h2 class='name'>{{ $museum->name }}</h2>
                 <h2 class='place'>{{ $museum->placeName }}</h2>
-                
                 <h2 class='body'>{{ $museum->bodyName }}</h2>
                 <h2 class='address'>{{ $museum->address }}</h2>
                 <p class='time'>{{ $museum->time }}</p>
@@ -30,16 +29,12 @@
             <form action="/museums/{{ $museum->id }}" id="form_{{ $museum->id }}" method="post" style="display:inline">
             @csrf
             @method('DELETE')
-                <button type="submit">削除</button> 
+                <input type="submit" name="delete" class="btn btn-danger" value="削除" span onclick="return deleteMuseum(this);" >
             </form>
             @endif
-            <div class="back">[<a href="/">back</a>]</div>
-            <script>
-                function deleteMuseum(e) {
-                    'use strict';
-                    if (confirm('削除すると復元できません。\n本当に削除しますか？'))　{
-                        document.getElementById('form_delete').submit();
-                    }
-                }
-            </script>
+            
+            <button type="button" class="btn btn-info" onClick="history.back()">戻る</button>
+            
+        </section>    
+        
  @endsection

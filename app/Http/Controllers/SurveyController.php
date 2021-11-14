@@ -16,40 +16,29 @@ class SurveyController extends Controller
 
     public function confirm(SurveyRequest $request, Museum $museum)
     {
-        // $reasoncoming = implode("、",$request->reasoncoming);
-        // $survey = new Survey($request->all());
-        
-        // $survey = new Survey($request->all());
-        
-    // $livings = Survey::$living;
-    // dd($survey);
-    
-// $input = $request[‘question‘];
-// 	$question->fill($input)->save();
-        // $input = $request['survey'];
-        // $survey->fill($input)->save();
-        
         return view('survey.confirm')->with(['museum'=>$museum, 'request'=>$request]);
     }
-    
-    // public function store(Survey $survey, Request $request)
-    // {
-    //     $input = $request['survey'];
-    //     $survey->fill($input)->save();
-        
-    //     return redirect('/survey/' . $museum->id);
-    // }
-    
+
     public function complete(Survey $survey, Museum $museum, SurveyRequest $request)
     {
         $input = $request->all();
         $input['museum_id']=$museum->id;
         $survey->fill($input)->save();
-        // Survey::create($request->all());
-        // $input = $request['survey'];
-        // $survey->fill($input)->save();
-        // Survey::create($request->all());
+        
         return view('survey.complete');
     }
-
+    
+    public function result(Survey $survey, Museum $museum)
+    {
+        // $surveys=Survey::all();
+        $surveys = Museum::find($museum->id)->surveys;
+        foreach($surveys as $survey){
+            $museum_id = $survey->museum_id;
+            $museum_name = Museum::find($museum_id)->name;
+            $survey->museum_name = $museum_name;
+        }
+        
+        $surveys = $survey->paginate(2);
+        return view('survey.result')->with(['museum'=>$museum, 'surveys'=>$surveys, 'survey'=>$survey]);
+    }
 }

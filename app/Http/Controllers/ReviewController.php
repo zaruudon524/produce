@@ -12,11 +12,7 @@ use Illuminate\Support\Facades\DB;
 
 class ReviewController extends Controller
 {
-    public function index(Museum $museum)
-    {
-         return view('reviews.index')->with(['museums' => $museum->get()]);
-    }
-
+    
     public function show(Review $review, Museum $museum,User $user)
     {
         $reviews = $review ->get();
@@ -41,15 +37,11 @@ class ReviewController extends Controller
         // 博物館名表示
         
         foreach($reviews as $review){
-            // $reviews=Review::paginate(2);
         $museum_id = $review->museum_id;
         $museum_name = optional($museum->find($museum_id))->name;
         $review->museum_name = $museum_name;
-        // dd($reviews);
-        
         }
-        // $museums = $museum ->get();
-        
+       
         return view('reviews.history')->with(['reviews'=>$reviews]);
     }
     
@@ -65,16 +57,7 @@ class ReviewController extends Controller
         // 入力情報全取得
         $input['museum_id']=$museum->id;
         //リレーション、museumidを渡す
-        // $input['user_id']=$review->users()->where('user_id', Auth::id());
-        // $input['user_id']=$review->Auth::id;
-        // $reviews=$user->reviews;
-        // $input['user_id']=$user->id
-        
-        // $review->museum_id=$request->museums()->id;
-        // $review->museums->name = $request->name;
-        
         $review->user_id=$request->user()->id;
-        
         //リレーション、user_idを渡す
         $review->fill($input)->save();
         
@@ -100,9 +83,9 @@ class ReviewController extends Controller
         return redirect('/reviews/' . $review->id);
     }
     
-    public function delete(Review $review)
+    public function delete(Review $review, User $user)
     {
         $review->delete();
-         return redirect('/reviews');
+        return redirect('/');
     }
 }

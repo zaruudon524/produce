@@ -3,12 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Museum;
+// use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class Review extends Model
 {
-    use SoftDeletes;
+    // use SoftDeletes;
     
     protected $fillable = [
     'title',

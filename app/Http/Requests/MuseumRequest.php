@@ -33,4 +33,11 @@ class MuseumRequest extends FormRequest
             'museum.other'=> 'nullable',
         ];
     }
+    
+    public function messages()
+    {
+        return [
+            'required' => '必須項目です。'
+        ];
+    }
 }

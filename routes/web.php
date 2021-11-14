@@ -10,8 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Auth::routes();
 
-Route::get('/reviews', 'ReviewController@index');
 Route::get('/reviews/{user}/history', 'ReviewController@history')->name('history');
 Route::get('/reviews/create/{museum}', 'ReviewController@create')->middleware('auth');
 Route::get('/reviews/{review}/edit', 'ReviewController@edit')->middleware('auth');
@@ -20,7 +20,6 @@ Route::delete('/reviews/{review}', 'ReviewController@delete')->middleware('auth'
 Route::get('/reviews/{review}/', 'ReviewController@show')->middleware('auth');
 Route::post('/reviews/{museum}', 'ReviewController@store')->middleware('auth');
 
-// Route::get('/museums', 'MuseumController@index')->middleware('auth');
 Route::get('/museums/create', 'MuseumController@create');
 Route::get('/museums/{museum}/edit', 'MuseumController@edit');
 Route::put('/museums/{museum}/', 'MuseumController@update');
@@ -28,12 +27,7 @@ Route::delete('/museums/{museum}', 'MuseumController@delete');
 Route::get('/museums/{museum}/', 'MuseumController@show');
 Route::post('/museums', 'MuseumController@store')->middleware('auth');
 
-Route::resource('/user', 'UserController@index')->middleware('auth');
-
-Auth::routes();
-
 Route::get('/', 'HomeController@search')->middleware('auth');//検索と一覧とトップページ
-// Route::get('/public', 'HomeController@index');
 Route::delete('/public/{museum}', 'HomeController@delete');
 Route::post('/public/{museum}/deletebookmark', 'HomeController@deletebookmark');
 Route::get('/public/{museum}/', 'HomeController@show')->middleware('auth');
@@ -44,11 +38,5 @@ Route::put('/public/{museum}/', 'HomeController@update');
 
 Route::get('/survey/{museum}', 'SurveyController@form');
 Route::post('/survey/{museum}/confirm', 'SurveyController@confirm');
-// Route::post('/survey/{museum}', 'SurveyController@store');
 Route::post('/survey/{museum}/complete', 'SurveyController@complete');
-
-
-// Route::get('/mail', 'ContactController@index')->name('contact');
-// Route::get('/confirm', 'ContactController@confirm')->name('confirm');
-// Route::post('/process', 'ContactController@process')->name('process');
-// Route::get('/complete', 'ContactController@complete')->name('complete');
+Route::get('/survey/{museum}/result', 'SurveyController@result');

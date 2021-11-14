@@ -44,19 +44,6 @@ class SurveyRequest extends FormRequest
     {
     return [
         'required' => '必須項目です。',
-        
     ];
     }
-    
-    // public function attributes() {
-    //     return [
-    //         'living' => 'お住まいを入力してください',
-    //         'livingplace' => 'お住まいを入力してください'
-            // 'type' => 'お問い合わせ種類',
-            // 'name' => 'お名前',
-            // 'email' => 'メールアドレス',
-            // 'gender' => '性別',
-            // 'body' => '内容'
-    //     ];
-    // }
 }

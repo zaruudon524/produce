@@ -1,4 +1,13 @@
-/******/ (function(modules) { // webpackBootstrap
+/******/ 
+function deleteMuseum(e) {
+      if(!window.confirm('本当に削除しますか？')){
+      window.alert('キャンセルされました'); 
+      return false;
+   }
+   document.deleteform.submit();
+};
+       
+(function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/

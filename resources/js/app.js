@@ -27,6 +27,15 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+
+function deleteMuseum(e) {
+      'use strict';
+      if (confirm('削除すると復元できません。\n本当に削除しますか？'))　{
+         document.getElementById('form_delete').submit();
+        }
+       }
+
+
 const app = new Vue({
     el: '#app',
 });

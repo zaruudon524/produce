@@ -30,7 +30,7 @@
             
            <!--管理者作成の博物館データ-->
             @if(Auth::user()->id === 1)
-                <p class='create'>[<a href='/museums/create'>投稿作成</a>]</p>
+                <a href='/museums/create' type="button" class="btn btn-info">投稿作成</a>
             @endif 
             
             <!--検索があった時の件数-->
@@ -38,7 +38,7 @@
                     
                 <!--検索結果-->
                 @if (count($museumsearches) >0)
-                    <p class='number'>全{{ $museumsearches->total() }}件中</p>
+                    <p class='number'>全{{ $museumsearches->total() }}件中
                     <!--データ領域にある、条件に一致するアイテムの総数-->
                     {{  ($museumsearches->currentPage() -1) * $museumsearches->perPage() + 1}} - 
                     {{ (($museumsearches->currentPage() -1) * $museumsearches->perPage() + 1) + (count($museumsearches) -1)  }}件のデータが表示されています。</p>
@@ -50,9 +50,9 @@
                 @foreach($museumsearches as $museumsearch)
                 <div class='museum'>
                     <a href="/public/{{ $museumsearch->id }}">{{ $museumsearch->name }}</a></br>
-                    <p class='place'>場所</p>
+                    <!--<p class='place'>場所</p>-->
                     <p class='place'>{{ $museumsearch->placeName }}</p>
-                    <p class='body'>属性</p>
+                    <!--<p class='body'>属性</p>-->
                     <p class='body'>{{ $museumsearch->bodyName }}</p>
                 </div>
                 @endforeach
@@ -81,9 +81,9 @@
                @foreach($museums as $museum)
                 <div class='museum'>
                     <a href="/public/{{ $museum->id }}">{{ $museum->name }}</a></br>
-                    <p class='place'>場所</p>
+                    <!--<p class='place'>場所</p>-->
                     <p class='place'>{{ $museum->placeName }}</p>
-                    <p class='body'>属性</p>
+                    <!--<p class='body'>属性</p>-->
                     <p class='body'>{{ $museum->bodyName }}</p>
                 </div>
                 @endforeach

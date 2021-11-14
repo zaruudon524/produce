@@ -2,8 +2,9 @@
 
 @section('content')
 
-    <h1>アンケート</h1></br>
+    
         <section class="bg-light p-5">
+        <h1>アンケート</h1></br>
         <form action="/survey/{{ $museum->id }}/confirm" method="POST" class="needs-validation" novalidate>
         @csrf
             <div class="form-group">

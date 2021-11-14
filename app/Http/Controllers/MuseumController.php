@@ -7,49 +7,37 @@ use App\User;
 use App\Pref;
 use App\Museumkind;
 use Illuminate\Http\Request;
-// use App\Http\Requests\Request;
+use App\Http\Requests\MuseumRequest;
 use Illuminate\Support\Facades\Auth;
 // use Illuminate\Support\Facades\DB;
-// use App\Tag;
 use Abraham\TwitterOAuth\TwitterOAuth;
 
 
 class MuseumController extends Controller
 {
-    public function index(Museum $museum, Request $request)
-    {
-         return view('index')->with(['museums' => $museum -> get()]);
-    }
-
     public function show(Museum $museum)
     {
-        // $isBookmarked=$museum->users()->where('user_id', Auth::id())->exists();
         $places=Pref::all();
         $bodies = Museumkind::all();
-        // $museum=Pref::all()->museums;
-        // dd($museum);
         return view('museums.show')->with(['museum' => $museum, 'places'=>$places, 'bodies'=>$bodies]);
     }
 
     public function create(Museum $museum)
     {
         $places=Pref::all();
-        
-        // $museums = Pref::find(place_id);
-        // $places = Museum::where('pref');
         $bodies = Museumkind::all();
-        // dd($places);
         $museums = Museum::all();
+        
         foreach($museums as $museum){
             $place_id = $museum->place_id;
             $place_name = optional($places->find($place_id))->name;
             $museum->place_name = $place_name;
         }
-        // dd($place_name);
+        
         return view('museums.create')->with(['places'=>$places, 'bodies'=>$bodies, 'museums'=>$museums]);
     }
 
-    public function store(Museum $museum, Request $request)
+    public function store(Museum $museum, MuseumRequest $request)
     {
         $input = $request['museum'];
         $museum->fill($input)->save();
@@ -69,23 +57,9 @@ class MuseumController extends Controller
         return redirect('/museums/' . $museum->id);
     }
     
-    
-    // public function edit(Museum $museum)
-    // {
-    //     return view('museums.edit')->with(['museum' => $museum]);
-    // }
-    
-    // public function update(Request $request, Museum $museum)
-    // {
-    //     $input_museum = $request['museum'];
-    //     $museum->fill($input_museum)->save();
-        
-    //     return redirect('/museums/' . $museum->id);
-    // }
-    
     public function delete(Museum $museum)
     {
         $museum->delete();
-        return redirect('/museums');
+        return redirect('/');
     }
 }
