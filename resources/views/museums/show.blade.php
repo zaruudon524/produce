@@ -2,12 +2,6 @@
 
 @section('content')
     <section class="bg-light p-3">
-        <h1>博物館</h1>
-        @if(Auth::user()->id === 1)
-            <a href="/museums/{{ $museum->id }}/edit"  class="btn btn-info">編集</a>
-            <input type="submit" style="display:none">
-        @endif
-            
 
             <div class='museums'>
                 <h2 class='name'>{{ $museum->name }}</h2>

@@ -140,6 +140,6 @@ class HomeController extends Controller
     public function delete(Museum $museum)
     {
         $museum->delete();
-        return redirect('/public');
+        return redirect('/');
     }
 }
