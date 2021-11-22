@@ -25,9 +25,9 @@
    <footer>
     <div id="sampleFooter" class="footerStyle">
     <!--<div class="hdStrSmall">フッターメニューなど</div>-->
-    <a class="hdStrSmall" href='/public/{{ Auth::id() }}/good'>bookmark</a>
+    <a class="hdStrSmall" href='/public/{{ Auth::id() }}/good'>ブックマーク</a>
     
-    <a class="hdStrSmall" href='/'>ホーム</a>
+    <a class="hdStrSmall" href='/'>検索</a>
     
     <a class="hdStrSmall" href='/reviews/{{ Auth::id() }}/history'>投稿履歴</a> 
     

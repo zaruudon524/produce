@@ -67,7 +67,9 @@
                                         @csrf
                                     </form>
                                     
-                                    <a class="dropdown-item" href='/public/{{ Auth::id() }}/good'>bookmark</a>
+                                    <a class="dropdown-item" href='/public/{{ Auth::id() }}/good'>ブックマーク</a>
+                                    
+                                    <a class="dropdown-item" href='/reviews/{{ Auth::id() }}/history'>投稿履歴</a> 
                                     
                                 </div>
                             </li>

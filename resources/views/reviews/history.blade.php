@@ -2,7 +2,7 @@
 
 @section('content')
 <section class="bg-light p-3">
-    <h1>投稿履歴</h1></br>
+    <h5 class="lead">投稿履歴</h5></br>
    
    @if(empty($reviews))
         <h3 class="text-center">口コミを投稿してみよう！</h3>
@@ -18,13 +18,14 @@
    
    <!--博物館名表示-->
     @foreach($reviews as $review)
-        <div class='review'>
+        <h5 class="lead">
             <a href="/public/{{ $review->museum_id }}">{{ $review->museum_name }}</a><br>
             <a href="/reviews/{{ $review->id }}/">{{ $review->title }}</a>
             <p class='body'>{{ $review->body }}</p>
-        </div>
+        </h5>
     
     <!--//画像表示-->
+    <div class="img-responsive img-rounded ml-6" width="50" height="50">
         @if(file_exists(public_path().'/storage/post_img/'. $review->id .'.jpg'))
             <img src="/storage/post_img/{{ $review->id }}.jpg">
         @elseif(file_exists(public_path().'/storage/post_img/'. $review->id .'.jpeg'))
@@ -34,7 +35,7 @@
         @elseif(file_exists(public_path().'/storage/post_img/'. $review->id .'.gif'))
             <img src="/storage/post_img/{{ $review->id }}.gif">
         @endif</br>
-        
+    </div>
     @endforeach
     
     {{ $reviews->links() }}

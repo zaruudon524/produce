@@ -1,14 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-   <section class="bg-light p-3">
+    <section class="bg-light p-3">
         <h1>{{$review->museum_name}}さんの口コミ投稿</h1>
             <div class='review'>
                 <a href="/public/{{ $review->museum_id }}">{{ $review->museum_name }}</a><br>
-                <h2 class='title'>{{ $review->title }}</h2>
-                <p class='body'>{{ $review->body }}</p>
-                <p class='updated_at'>{{ $review->updated_at }}</p>
-                <!--<input type="hidden" name="userid" value="" />-->
+                <h2 class="lead">{{ $review->title }}</h2>
+                <h2 class="lead">{{ $review->body }}</h2>
+                <h2 class="lead">{{ $review->updated_at }}</h2>
             </div>
             
             @if(Auth::user()->id === $review->user_id )
@@ -24,9 +23,9 @@
             
         @endif
             
-            <button type="button" class="btn btn-info" onClick="history.back()">戻る</button>
+        <button type="button" class="btn btn-info" onClick="history.back()">戻る</button>
             
-        </section>
+    </section>
     @include("layouts.footer" )
     @endsection
 

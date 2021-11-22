@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="bg-light p-3">
-        <h1>ブックマーク</h1>
+        <h5 class="lead">ブックマーク</h5>
         
         <!--件数-->
         @if (count($museums) >0) 
@@ -11,17 +11,17 @@
             {{  ($museums->currentPage() -1) * $museums->perPage() + 1}} - 
             {{ (($museums->currentPage() -1) * $museums->perPage() + 1) + (count($museums) -1)  }}件のデータが表示されています。</p>
             <!--現在の頁数*ページごとに表示するアイテム数-->
-            @else
+        @else
             <p>データがありません。</p>
         @endif
         
         @foreach($museums as $museum)
             <div class='museum'>
-                <a href="/public/{{ $museum->id }}">{{ $museum->name }}</a></br>
+                <h6><a href="/public/{{ $museum->id }}">{{ $museum->name }}</a></h6>
                 <!--<p class='place'>場所</p>-->
-                <p class='place'>{{ $museum->placeName }}</p>
+                <h6>{{ $museum->placeName }}</h6>
                 <!--<p class='body'>属性</p>-->
-                <p class='body'>{{ $museum->bodyName }}</p>
+                <h6>{{ $museum->bodyName }}</h6>
             </div>
         @endforeach
         

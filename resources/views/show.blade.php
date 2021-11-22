@@ -2,7 +2,6 @@
 
 @section('content')
         <section class="bg-light p-3">
-        <h1>博物館</h1>
         <!--ブックマーク-->
             @if($isBookmarked)
              <div>
@@ -22,11 +21,10 @@
             </div>
             @endif
             
-            
             <div class='museums'>
-                <h2 class='name'>{{ $museum->name }}</h2>
-                <h2 class='place'>{{ $museum->placeName }}</h2>
-                <h2 class='body'>{{ $museum->bodyName }}</h2>
+                <h2 class="lead">{{ $museum->name }}</h2>
+                <h2 class="lead">{{ $museum->placeName }}</h2>
+                <h2 class="lead">{{ $museum->bodyName }}</h2>
                 <!--アンケート-->
             <div class="form-group row">
             <!--<div class="col-sm-12">-->
@@ -59,7 +57,7 @@
                     </div>
                 @endforeach
                 
-                <h2 class='address'>{{ $museum->address }}</p>
+                <p class='address'>{{ $museum->address }}</p>
                 <p class='time'>{{ $museum->time }}</p>
                 <p class='day'>{{ $museum->day }}</p>
                 <p class='money'>{{ $museum->money }}</p>

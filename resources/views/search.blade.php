@@ -1,13 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-        <!--<h1>ホーム</h1>-->
 
-        <!--検索-->
-        
             <form action="/" method="GET">
                 @csrf
-                <h2>博物館を探す</h2>
+                <h5 class="lead">博物館を探す</h5></br>
                 <input type="text" name="searchWord" value="{{ $searchWord }}" placeholder="博物館名" class="form-group"></br>
                 
                 <div style="display:inline-flex">
@@ -25,7 +22,7 @@
                         @endforeach
                 </select><br>
                 </div>
-                <input type="submit" class='btn btn-primary', value="検索"/>
+                <input type="submit" class='btn btn-primary' value="検索"/>
             </form>
             
            <!--管理者作成の博物館データ-->
@@ -51,9 +48,9 @@
                 <div class='museum'>
                     <a href="/public/{{ $museumsearch->id }}">{{ $museumsearch->name }}</a></br>
                     <!--<p class='place'>場所</p>-->
-                    <p class='place'>{{ $museumsearch->placeName }}</p>
+                    <div>{{ $museumsearch->placeName }}</div>
                     <!--<p class='body'>属性</p>-->
-                    <p class='body'>{{ $museumsearch->bodyName }}</p>
+                    <div>{{ $museumsearch->bodyName }}</div>
                 </div>
                 @endforeach
     
@@ -82,9 +79,9 @@
                 <div class='museum'>
                     <a href="/public/{{ $museum->id }}">{{ $museum->name }}</a></br>
                     <!--<p class='place'>場所</p>-->
-                    <p class='place'>{{ $museum->placeName }}</p>
+                    <div>{{ $museum->placeName }}</div>
                     <!--<p class='body'>属性</p>-->
-                    <p class='body'>{{ $museum->bodyName }}</p>
+                    <div>{{ $museum->bodyName }}</div>
                 </div>
                 @endforeach
             

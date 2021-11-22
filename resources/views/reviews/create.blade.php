@@ -2,17 +2,17 @@
 
 @section('content')
         <section class="bg-light p-3">
-        <h1>投稿</h1>
+        <h5 class="lead">投稿</h1>
        <form action="/reviews/{{ $museum->id }}" method="POST" enctype="multipart/form-data">
            @csrf
-            <h2 class='name'>{{ $museum->name }}</h2>
+            <h5 class="lead">{{ $museum->name }}</h5>
             <div class="form-group">
-                <h3>タイトル</h3>
+                <h5>タイトル</h5>
                 <input type="text" name="review[title]" class="form-control" placeholder="タイトル" value="{{ old('review.title') }}"/><br>
                 <p class="title__error" style="color:red">{{ $errors->first('review.title') }}</p>
             </div>
             <div class="form-group">
-                <h3>本文</h3>
+                <h5>本文</h5>
                 <textarea name="review[body]" class="form-control" placeholder="本文" value="{{ old('review.body') }}"></textarea><br>
                 <p class="body__error" style="color:red">{{ $errors->first('review.body') }}</p>
             </div>

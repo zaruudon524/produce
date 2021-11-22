@@ -1,13 +1,4 @@
-/******/ 
-function deleteMuseum(e) {
-      if(!window.confirm('本当に削除しますか？')){
-      window.alert('キャンセルされました'); 
-      return false;
-   }
-   document.deleteform.submit();
-};
-       
-(function(modules) { // webpackBootstrap
+/******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
@@ -49827,6 +49818,14 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+
+function deleteMuseum(e) {
+  'use strict';
+
+  if (confirm('削除すると復元できません。\n本当に削除しますか？')) {
+    document.getElementById('form_delete').submit();
+  }
+}
 
 var app = new Vue({
   el: '#app'
