@@ -2,10 +2,7 @@
 
 @section('content')
 
-    <h1>アンケート結果</h1></br>
-    
-  
-    <a href="/pubic/{{ $museum->id }}/">{{ $survey->museum_name }}</a>
+    <h5> {{ $survey->museum_name }} アンケート結果</h5>
     
     <!--<table class="table ">-->
     @foreach($surveys as $survay)
@@ -53,10 +50,9 @@
                 <p scope="row">⑬	その他、ご意見・ご提案等ございましたらご自由に入力してください</p>
                 <div>{{ $survey->option }}</div></br>
             <p class="border-bottom border-primary"></p></br>
-            
-            <button type="button" class="btn btn-info" onClick="history.back()">戻る</button>
         
     @endforeach
+    <button type="button" class="btn btn-info" onClick="history.back()">戻る</button>
    </table>
     
     {{ $surveys->links() }}
