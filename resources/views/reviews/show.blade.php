@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="bg-light p-3">
-        <h1>{{$review->museum_name}}さんの口コミ投稿</h1>
+        <h1>{{$review->user_name}}さんの口コミ投稿</h1>
             <div class='review'>
                 <a href="/public/{{ $review->museum_id }}">{{ $review->museum_name }}</a><br>
                 <h2 class="lead">{{ $review->title }}</h2>

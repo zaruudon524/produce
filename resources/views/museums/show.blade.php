@@ -4,10 +4,10 @@
     <section class="bg-light p-3">
 
             <div class='museums'>
-                <h2 class='name'>{{ $museum->name }}</h2>
-                <h2 class='place'>{{ $museum->placeName }}</h2>
-                <h2 class='body'>{{ $museum->bodyName }}</h2>
-                <h2 class='address'>{{ $museum->address }}</h2>
+                <h5 class='name'>{{ $museum->name }}</h5>
+                <h5 class='place'>{{ $museum->placeName }}</h5>
+                <h5 class='body'>{{ $museum->bodyName }}</h2>
+                <p class='address'>{{ $museum->address }}</p>
                 <p class='time'>{{ $museum->time }}</p>
                 <p class='day'>{{ $museum->day }}</p>
                 <p class='money'>{{ $museum->money }}</p>

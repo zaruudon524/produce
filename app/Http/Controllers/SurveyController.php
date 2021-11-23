@@ -25,7 +25,7 @@ class SurveyController extends Controller
         $input['museum_id']=$museum->id;
         $survey->fill($input)->save();
         
-        return view('survey.complete');
+        return view('survey.complete')->with(['museum'=>$museum]);
     }
     
     public function result(Survey $survey, Museum $museum)

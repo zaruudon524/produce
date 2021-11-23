@@ -272,6 +272,10 @@
             <div class="col-sm-12">⑫	これまで訪れなかった要因は何ですか。または博物館に訪れる際に何を重要視しますか。（複数回答可）</div>
             <div class="col-sm-10">
                 <div class="custom-control custom-checkbox custom-control-inline">
+                    <input type="checkbox" name="reasonnotcoming[]" value="展示内容に興味がない" {{ is_array(old("reasonnotcoming")) && in_array("展示内容に興味がない", old("reasonnotcoming"), true)? 'checked="checked"' : '' }} class="custom-control-input" id="customCheck13">
+                    <label class="custom-control-label" for="customCheck13">展示内容に興味がない</label>
+                </div>
+                <div class="custom-control custom-checkbox custom-control-inline">
                     <input type="checkbox" name="reasonnotcoming[]" value="アクセス" {{ is_array(old("reasonnotcoming")) && in_array("アクセス", old("reasonnotcoming"), true)? 'checked="checked"' : '' }} class="custom-control-input" id="customCheck7">
                     <label class="custom-control-label" for="customCheck7">アクセス</label>
                 </div>
@@ -284,8 +288,8 @@
                     <label class="custom-control-label" for="customCheck9">子供向けかどうか</label>
                 </div>
                 <div class="custom-control custom-checkbox custom-control-inline">
-                    <input type="checkbox" name="reasonnotcoming[]" value="バリアフリーがあるかどうか" {{ is_array(old("reasonnotcoming")) && in_array("バリアフリーがあるかどうか", old("reasonnotcoming"), true)? 'checked="checked"' : '' }} class="custom-control-input" id="customCheck10">
-                    <label class="custom-control-label" for="customCheck10">バリアフリーがあるかどうか</label>
+                    <input type="checkbox" name="reasonnotcoming[]" value="バリアフリーであるか" {{ is_array(old("reasonnotcoming")) && in_array("バリアフリーであるか", old("reasonnotcoming"), true)? 'checked="checked"' : '' }} class="custom-control-input" id="customCheck10">
+                    <label class="custom-control-label" for="customCheck10">バリアフリーであるか</label>
                 </div>
                 <div class="custom-control custom-checkbox custom-control-inline">
                     <input type="checkbox" name="reasonnotcoming[]" value="駐車場の有無" {{ is_array(old("reasonnotcoming")) && in_array("駐車場の有無", old("reasonnotcoming"), true)? 'checked="checked"' : '' }} class="custom-control-input" id="customCheck11">
