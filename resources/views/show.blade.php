@@ -57,16 +57,44 @@
                     </div>
                 @endforeach
                 
-                <p class='address'>{{ $museum->address }}</p>
-                <p class='time'>{{ $museum->time }}</p>
-                <p class='day'>{{ $museum->day }}</p>
-                <p class='money'>{{ $museum->money }}</p>
-                <p class='traffic'>{{ $museum->traffic }}</p>
-                <p class='sns'>{{ $museum->sns }}</p>
-                <p class='tel'>{{ $museum->tel }}</p>
-                <p class='homepage'>{{ $museum->homepage }}</p>
-                <p class='other'>{{ $museum->other }}</p>
-                
+            <table class="table">
+                <tr>
+                    <th scope="row">住所</th>
+                    <td>{{ $museum->address }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">開館時間</th>
+                    <td>{{ $museum->time }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">休館日</th>
+                    <td>{{ $museum->day }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">入館料</th>
+                    <td>{{ $museum->money }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">交通手段</th>
+                    <td>{{ $museum->traffic }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">SNS</th>
+                    <td>{{ $museum->sns }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">問い合わせ</th>
+                    <td>{{ $museum->tel }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">ホームページ</th>
+                    <td>{{ $museum->homepage }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">備考</th>
+                    <td>{{ $museum->other }}</td>
+                </tr>
+            </table>
                 <!--googlemap api-->
                 <iframe id='map' src='https://www.google.com/maps/embed/v1/place?key= {{ config("services.google-map.apikey") }}&q={{ $museum->address }}'
                 width='50%' height='300' frameborder='0'></iframe>
