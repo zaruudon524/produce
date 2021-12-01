@@ -45,12 +45,6 @@ class HomeController extends Controller
         }
         
         $museums=$museum->paginate(2);
-        // dd($museums);
-        // $places = Pref::all();
-        // $museum1 = Museum::where('place_id',$places)->first();
-        // $museum=Museum::with('prefs')->get();
-        // dd($museum->toArray());
-        // var_dump($museums);
         
         return view('show')->with(['museum' => $museum, 'museums'=>$museums, 'reviews' => $reviews, 'review'=>$review, 'isBookmarked' =>$isBookmarked]);
     }

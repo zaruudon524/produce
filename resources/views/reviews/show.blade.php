@@ -7,6 +7,31 @@
                 <a href="/public/{{ $review->museum_id }}">{{ $review->museum_name }}</a><br>
                 <h2 class="lead">{{ $review->title }}</h2>
                 <h2 class="lead">{{ $review->body }}</h2>
+                
+                <!--画像表示-->
+                @if (App::environment('local'))
+                    <div class="img-responsive img-rounded ml-6" alt="参考画像">
+                        @if(file_exists(public_path().'/storage/post_img/'. $review->id .'.jpg'))
+                            <img src="/storage/post_img/{{ $review->id }}.jpg">
+                        @elseif(file_exists(public_path().'/storage/post_img/'. $review->id .'.jpeg'))
+                            <img src="/storage/post_img/{{ $review->id }}.jpeg">
+                        @elseif(file_exists(public_path().'/storage/post_img/'. $review->id .'.png'))
+                            <img src="/storage/post_img/{{ $review->id }}.png">
+                        @elseif(file_exists(public_path().'/storage/post_img/'. $review->id .'.gif'))
+                            <img src="/storage/post_img/{{ $review->id }}.gif">
+                        @endif<br>
+                        </div>
+                @else
+                        @if(file_exists(public_path().'https://imagemuseum.s3.ap-northeast-1.amazonaws.com/storage/post_img'. $review->id .'.jpg'))
+                            <img class="img-rounded" src="https://imagemuseum.s3.ap-northeast-1.amazonaws.com/storage/post_img/{{ $review->id }}.jpg"></p>
+                        @elseif(file_exists(public_path().'https://imagemuseum.s3.ap-northeast-1.amazonaws.com/storage/post_img'. $review->id .'.jpeg'))
+                            <img src="https://imagemuseum.s3.ap-northeast-1.amazonaws.com/storage/post_img/{{ $review->id }}.jpeg">
+                        @elseif(file_exists(public_path().'https://imagemuseum.s3.ap-northeast-1.amazonaws.com/storage/post_img'. $review->id .'.png'))
+                            <img src="https://imagemuseum.s3.ap-northeast-1.amazonaws.com/storage/post_img'. $review->id .'.png">
+                        @elseif(file_exists(public_path().'https://imagemuseum.s3.ap-northeast-1.amazonaws.com/storage/post_img'. $review->id .'.gif'))
+                            <img src="https://imagemuseum.s3.ap-northeast-1.amazonaws.com/storage/post_img'. $review->id .'.gif">
+                        @endif<br>
+                @endif
                 <h2 class="lead">{{ $review->updated_at }}</h2>
             </div>
             

@@ -44,17 +44,30 @@
                         <a href="/reviews/{{ $review->id }}/">{{ $review->title }}</a>
                         <p class='body'>{{ $review->body }}</p>
                      <!--画像表示-->
-                    <div class="img-responsive img-rounded ml-6" alt="参考画像" width="200" height="200">
-                        @if(file_exists(public_path().'/storage/post_img/'. $review->id .'.jpg'))
-                            <img src="/storage/post_img/{{ $review->id }}.jpg">
-                        @elseif(file_exists(public_path().'/storage/post_img/'. $review->id .'.jpeg'))
-                            <img src="/storage/post_img/{{ $review->id }}.jpeg">
-                        @elseif(file_exists(public_path().'/storage/post_img/'. $review->id .'.png'))
-                            <img src="/storage/post_img/{{ $review->id }}.png">
-                        @elseif(file_exists(public_path().'/storage/post_img/'. $review->id .'.gif'))
-                            <img src="/storage/post_img/{{ $review->id }}.gif">
-                        @endif<br>
-                    </div>
+                        @if (App::environment('local'))
+                        <div class="img-responsive img-rounded ml-6" alt="参考画像">
+                            @if(file_exists(public_path().'/storage/post_img/'. $review->id .'.jpg'))
+                                <img src="/storage/post_img/{{ $review->id }}.jpg">
+                            @elseif(file_exists(public_path().'/storage/post_img/'. $review->id .'.jpeg'))
+                                <img src="/storage/post_img/{{ $review->id }}.jpeg">
+                            @elseif(file_exists(public_path().'/storage/post_img/'. $review->id .'.png'))
+                                <img src="/storage/post_img/{{ $review->id }}.png">
+                            @elseif(file_exists(public_path().'/storage/post_img/'. $review->id .'.gif'))
+                                <img src="/storage/post_img/{{ $review->id }}.gif">
+                            @endif<br>
+                        </div>
+                        @else
+                            @if(file_exists(public_path().'https://imagemuseum.s3.ap-northeast-1.amazonaws.com/storage/post_img'. $review->id .'.jpg'))
+                                <img class="img-rounded" src="https://imagemuseum.s3.ap-northeast-1.amazonaws.com/storage/post_img/{{ $review->id }}.jpg"></p>
+                            @elseif(file_exists(public_path().'https://imagemuseum.s3.ap-northeast-1.amazonaws.com/storage/post_img'. $review->id .'.jpeg'))
+                                <img src="https://imagemuseum.s3.ap-northeast-1.amazonaws.com/storage/post_img/{{ $review->id }}.jpeg">
+                            @elseif(file_exists(public_path().'https://imagemuseum.s3.ap-northeast-1.amazonaws.com/storage/post_img'. $review->id .'.png'))
+                                <img src="https://imagemuseum.s3.ap-northeast-1.amazonaws.com/storage/post_img'. $review->id .'.png">
+                            @elseif(file_exists(public_path().'https://imagemuseum.s3.ap-northeast-1.amazonaws.com/storage/post_img'. $review->id .'.gif'))
+                                <img src="https://imagemuseum.s3.ap-northeast-1.amazonaws.com/storage/post_img'. $review->id .'.gif">
+                            @endif<br>
+                        @endif
+                   
                 @endforeach
                 
             <table class="table">
