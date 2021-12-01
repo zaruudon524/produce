@@ -74,16 +74,15 @@ class ReviewController extends Controller
         // $review->image = $request->image->storeAs('public/post_img',$time.'_'.Auth::user()->id. '.jpg');
         if($request->post_img){
         if (app()->isLocal()) {
-            
             if($request->post_img->extension() == 'gif' || $request->post_img->extension() == 'jpeg' || $request->post_img->extension() == 'jpg' || $request->post_img->extension() == 'png'){
             $request->file('post_img')->storeAs('public/post_img', $review->id.'.'.$request->post_img->extension());
-            }}
+            }
         } else {
             if($request->post_img->extension() == 'gif' || $request->post_img->extension() == 'jpeg' || $request->post_img->extension() == 'jpg' || $request->post_img->extension() == 'png'){
             $image=$request->file('post_img');
             $path = Storage::disk('s3')->putFile('/', $image, 'public');
             $review->image = $path;
-            }
+            }}
             // $image = $request->file('post_img');
             // $path = Storage::disk('s3')->putFile('public/post_img', $review->id.'.'.$request->post_img->extension());
             // $review->image = $path;
